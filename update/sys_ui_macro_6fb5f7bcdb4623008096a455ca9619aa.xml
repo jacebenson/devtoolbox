@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne&#13;
+&#13;
+Replaces the OOB "Suggestion field type" by displaying an icon beside fields that have a pre-defined list of responses.&#13;
+&#13;
+To use, add "u_fpc_show_suggestions" to the feld's "field_decorations" Attributes field.</description>
+        <media_type/>
+        <name>u_fpc_show_suggestions</name>
+        <scoped_name>x_8821_dev_toolbox_u_fpc_show_suggestions</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 06:31:01</sys_created_on>
+        <sys_id>6fb5f7bcdb4623008096a455ca9619aa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>u_fpc_show_suggestions</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_macro_6fb5f7bcdb4623008096a455ca9619aa</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 06:31:01</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g2:evaluate >
+		//var title = gs.getMessage("u_fpc_show_suggestions_title");  //uncomment if you want a Message record to contain the icon's hint
+		var title = "Show some suggested values";
+		var table = "${ref}".split(".")[0];
+		var element = "${ref}".split(".")[1];
+		var choices = 1;  // set to 0 if you want to check for options (not the most efficient)
+	/*  remove matching block comments if you want to check for options (not the most efficient)
+		//check the Choices table to see if there are any suggestions for this field
+		var count = new GlideAggregate("sys_choice");
+		count.addAggregate("COUNT");
+		count.addEncodedQuery("inactive=false^name=" + table + "^element=" + element);
+		count.query();
+		if (count.next()) {
+		   choices = count.getAggregate("COUNT");
+		}
+	*/
+		var style = choices == 0 ? "display: none" : "display:";
+	</g2:evaluate>
+		<a id="u_fpc_show_suggestions.${ref}" name="u_fpc_show_suggestions_${ref}" data-type="pick_list" data-ref="${ref}" data-table="$[table]" data-element="$[element]" data-dependent="null" tabindex="-1" role="button" class="btn btn-default btn-ref" title="$[title]" style="$[style]">
+		<span class="icon icon-lightbulb" style=";"></span>
+	</a>
+
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

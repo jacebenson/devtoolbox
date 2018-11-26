@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>sysevent_email_action</basic_apply_to>
+        <basic_query_from>sys_script_email</basic_query_from>
+        <insert_callback/>
+        <name>Email Scripts</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+	//allows admins to see a list of Email Scripts referenced in a Notification record
+	//the "Email Scripts" Related List must be added to the Notifications form
+	
+	var mailScript = [];
+	var names = [];
+	var query = "sys_id=-1";  //default so no records are returned/shown
+
+	//get the contents of the Message or Message HTML field
+	var message = "";
+	if (parent.sys_version == 2) {
+		message = parent.getValue("message_html");
+	} else {
+		message = parent.getValue("message");
+	}
+
+	//find any script names within the message
+	var regex = /\$\{mail_script:(.[^}]*)?\}/g;
+	while ((mailScript = regex.exec(message))) {
+		names.push(mailScript[1]);
+	}
+
+	//create the query if any script names were found
+	if (names.length > 0){
+		query = "nameIN" + names.join(",");
+	}
+
+	//get the list of scripts based on what was found in the message field
+	current.addEncodedQuery(query);
+})(current, parent);]]></query_with>
+        <reference_field>sys_scope</reference_field>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 06:32:08</sys_created_on>
+        <sys_id>79e533fcdb4623008096a455ca96197e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Email Scripts</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_relationship_79e533fcdb4623008096a455ca96197e</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 06:32:08</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=79e533fcdb4623008096a455ca96197e"/>
+</record_update>

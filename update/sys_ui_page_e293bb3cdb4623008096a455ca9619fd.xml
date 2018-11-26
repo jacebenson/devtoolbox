@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[//clear the textarea control
+document.getElementById("text").value = "";
+
+//show the NULL Selection Text objects
+u_fpc_showNullSelectionText(true);
+
+function u_fpc_showNullSelectionText(checked){
+	try {
+		var visible = "none";
+		if (checked){
+			visible = "";
+		}
+		document.getElementById("null_option_text_label").style.display = visible;
+		document.getElementById("null_option_text").style.display = visible;
+	} catch(err) {}
+}
+
+function u_fpc_setYesNoOptions(){
+	try {
+		//set the Options so entries will be created for -- Please Select --, Yes and No
+		document.getElementById("text").value = "Yes\nNo";
+		document.getElementById("separated_by").value = "line";
+		document.getElementById("include_null_option").checked = true;
+		document.getElementById("null_option_text").value = "-- Please Select --";
+		document.getElementById("starting_order").value = "100";
+		document.getElementById("increment").value = "100";			
+		u_fpc_showNullSelectionText(true);
+	} catch(err) {}
+}]]></client_script>
+        <description>Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne&#13;
+&#13;
+Allows users to quickly and easily add new Question Choice entries from a supllied list of items.  Strings will be trimmed before use.&#13;
+&#13;
+Options include:&#13;
+- adding data either as a comma-separated string, or split into 1 item per line&#13;
+- set the starting Order #&#13;
+- set the number to increment the new entries by&#13;
+- include a NULL option to override the default "-- None --" entry&#13;
+- set the string for the NULL override option&#13;
+- using the same string for the Text and Value fields or have the Text field converted to a lower-case string with all non A-Z, 0-9 characters replaced with an underscore character</description>
+        <direct>false</direct>
+        <endpoint>x_8821_dev_toolbox_u_fpc_add_multiple_question_choices.do</endpoint>
+        <html><![CDATA[<g:ui_form>
+	<input type="hidden" name = "variable_id" value = "${sysparm_variable_id}"/>
+	<input type="hidden" name = "variable_question" value = "${sysparm_variable_question}"/>
+	Add items to the text box and select how the data is separated (a comma or 1 item per line).  Leading and trailing spaces will be stripped.  They will be added as responses to the '${sysparm_variable_question}' Select Box variable.
+	<br/><br/>
+	<table border="0">
+		<tr>
+			<td style="width:250px; vertical-align:middle; text-align:right;">
+				How are the options separated
+			</td>
+			<td style="width:10px">
+			</td>
+			<td style="width:200px; vertical-align:middle;">
+				<select id="separated_by" name="separated_by" class="form-control">
+					<option value="comma">Comma-separated string</option>
+					<option value="line" selected="selected">One entry per line</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px; vertical-align:middle; text-align:right;">
+				<label title="">Start Order at</label>
+			</td>
+			<td style="width:10px">				
+			</td>
+			<td style="width:200px; vertical-align:middle;">
+				<input id="starting_order" name="starting_order" class="form-control" value = "100"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px; vertical-align:middle; text-align:right;">
+				<label title="Set to 0 for alphabetical sorting">Increment by</label>
+			</td>
+			<td style="width:10px">
+			</td>
+			<td style="width:200px; vertical-align:middle;">
+				<input id="increment" name="increment" class="form-control" value = "0"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px; vertical-align:middle; text-align:right;">
+				<label title="Used to override the '-- None --' option" class="checkbox-label">Include NULL option?</label>
+			</td>
+			<td style="width:10px">
+			</td>
+			<td style="width:200px; vertical-align:middle;">
+				<input id="include_null_option" name="include_null_option" type="checkbox" onclick="u_fpc_showNullSelectionText(this.checked)" checked="true"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px; vertical-align:middle; text-align:right;">
+				<label id="null_option_text_label" title="Will be displayed instead of '-- None --'" style="visibility:none">NULL selection text</label>
+			</td>
+			<td style="width:10px">
+			</td>
+			<td style="width:200px; vertical-align:middle;">
+				<input id="null_option_text" name="null_option_text" class="form-control" style="visibility:none" value = "-- Please Select --"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px; vertical-align:middle; text-align:right;">
+				<label title="The strings below will be used in both the Value and Text fields">Use the same string for the 'Value' field</label>
+			</td>
+			<td style="width:10px">				
+			</td>
+			<td style="width:200px; vertical-align:middle;">
+				<input id="use_text_as_value" name="use_text_as_value" type="checkbox"/>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	Enter your data here, either one entry per line (default) or a comma-separated string
+	<textarea id="text" name="text" style="width: 100%; height: auto; resize: none;" rows='10' title="Items to be added to the list of choices"/>
+
+	<div class="modal-footer">
+		<span class="pull-left">
+			<button id="yes_no_button" class="btn btn-default" style="min-width: 5em;" title="Set options above to add NULL/Yes/No choices" type="button" onclick="u_fpc_setYesNoOptions()">
+				Add "NULL / Yes / No" Choices
+			</button>
+		</span>
+		<span class="pull-right">
+			<button class="btn btn-default" id="cancel_button" onclick="(window.GlideDialogWindow || window.GlideModalForm).prototype.locate(this).destroy(); return false" style="min-width: 5em;" title="" type="submit">
+			Cancel
+			</button>
+			<button class="btn btn-primary" id="ok_button" onclick="actionOK()" style="min-width: 5em;" title="" type="submit">
+				OK
+			</button>
+		</span>
+	</div>
+</g:ui_form>]]></html>
+        <name>u_fpc_add_multiple_question_choices</name>
+        <processing_script><![CDATA[(function(){
+	//run on the server to create the Question Choice entries
+	var separatedBy = typeof separated_by !== "undefined" ? separated_by : line;
+	var useTextAsValue = typeof use_text_as_value !== "undefined" ? use_text_as_value : false;
+	var includeNullOption = typeof include_null_option !== "undefined" ? include_null_option : false;
+	var nullOptionText = typeof null_option_text !== "undefined" ? null_option_text : "-- Please Select --";
+	var startingOrder = typeof starting_order !== "undefined" ? starting_order : 100;
+	var incrementOrder = typeof increment !== "undefined" ? increment : 100;
+
+	startingOrder = parseInt(startingOrder);
+	if (isNaN(startingOrder)) startingOrder = 100;
+	incrementOrder = parseInt(incrementOrder);
+	if (isNaN(incrementOrder)) incrementOrder = 100;
+
+	var splitChar = ",";
+	if (separatedBy == "line"){
+		splitChar = "\n";
+	}
+	var choices = text.split(splitChar);
+	var arrayLength = choices.length;
+	var choice = new GlideRecord("question_choice");
+
+	//should we include a NULL option?
+	if (includeNullOption == "on" || includeNullOption == "true"){
+		var nullText = "-- Please Select --";
+		if (nullOptionText.trim() != "") {
+			nullText = nullOptionText.trim();
+		}
+		choice.initialize();
+		choice.order = 0;
+		choice.question = variable_id;
+		choice.text = nullText;
+		choice.insert();
+	}
+
+	var order = startingOrder;
+	for (var i = 0; i < arrayLength; i++) {
+		var option = choices[i].trim();
+		if (option != ""){
+			choice.newRecord();
+			choice.order = order;
+			choice.question = variable_id;
+			choice.text = option;
+			if (useTextAsValue == "on" || useTextAsValue == "true"){
+				choice.value = option;
+			} else {
+				//create a string for the Value field based on the Text field
+				var value = (option.toLowerCase().replace(/[^a-z0-9]/g, "_")).trim();
+				value = value.replace(/_+/g,"_");   // replaces any one or more instances of _ with only one _
+				value = value.replace(/^\_+|\_+$/g, "");   // replaces all leading or trailing _ with an empty string
+				choice.value = value;
+			}
+			choice.insert();
+			order += incrementOrder;
+		}
+	}
+	
+	//return to the previous page
+	var urlOnStack = GlideSession.get().getStack().bottom();
+	response.sendRedirect(urlOnStack);
+})();]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 06:22:32</sys_created_on>
+        <sys_id>e293bb3cdb4623008096a455ca9619fd</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>u_fpc_add_multiple_question_choices</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_page_e293bb3cdb4623008096a455ca9619fd</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 06:23:46</sys_updated_on>
+    </sys_ui_page>
+</record_update>

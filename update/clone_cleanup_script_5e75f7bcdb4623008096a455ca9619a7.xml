@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="clone_cleanup_script">
+    <clone_cleanup_script action="INSERT_OR_UPDATE">
+        <name>Custom - Post-Clone Reset Script</name>
+        <script><![CDATA[/*
+Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne
+
+Custom script to perform the following:
+	- deactivate Scheduled Email Reports
+	- deactivate Discovery Schedules (if configured)
+	- deactivate any Audit jobs
+	- deactivate custom Scheduled Jobs with a name starting with "Custom"
+	- set the repeat interval for the email send and receive jobs to 30 seconds
+	- clear the email outbox
+	- enable email sending and receiving	
+	- update the clone target property so the instance can be a clone target (gets overridden during the clone)
+	- set the "glide.product.description" property based on the instance suffix and current date to display in the banner frame
+*/
+
+(function() {
+	//to enable, remove or comment out the next line
+	return;
+	//put here to avoid accidentally running the script
+	
+	//figure out the sub-production suffix by removing the production instance name
+	//e.g. if the production name is "acme" and the dev instance is "acmedev", the instance variable value will be "DEV"
+	//used below when setting the banner frame title
+	//************************* replace "ProductionInstanceName" on the next line with the real value *************************
+	var instance = gs.getProperty("instance_name").replace("ProductionInstanceName", "").toUpperCase();
+
+
+	//deactivate the Scheduled Email Reports
+	//no point sending reports from sub-production instances
+	var gr = new GlideRecord("sysauto_report");
+	gr.addEncodedQuery("active=true");
+	gr.query();
+	while (gr.next()) {
+		gr.active = false;
+		gr.update();
+	}
+
+
+/*  remove the comment block if you are using Discovery and want to disable in sub-production instances
+	//deactivate Discovery Schedules
+	gr = new GlideRecord("discovery_schedule");
+	gr.addEncodedQuery("active=true");
+	gr.query();
+	while (gr.next()) {
+		gr.active = false;
+		gr.update();
+	}
+*/
+
+	//deactivate any Audit jobs
+	gr = new GlideRecord("cert_audit");
+	gr.addEncodedQuery("active=true^run_typeNOT INonce,on_demand");
+	gr.query();
+	while (gr.next()) {
+		gr.active = false;
+		gr.update();
+	}
+
+
+	//deactivate custom Scheduled Jobs with a name starting with "Custom"
+	//use the commented out query if you want to leave LDAP imports active
+	gr = new GlideRecord("sysauto");
+	//gr.addEncodedQuery("nameSTARTSWITHCustom^nameNOT LIKELDAP^active=true");
+	gr.addEncodedQuery("nameSTARTSWITHCustom^active=true");
+	gr.query();
+	while (gr.next()) {
+		gr.active = false;
+		gr.update();
+	}
+
+
+	//reset the mail send/receive intervals to 30 seconds
+	//handy for testing purposes, otherwise you are waiting 2 - 3 minutes for delivery/processing
+	gr = new GlideRecord("sys_trigger");
+	gr.addEncodedQuery("nameINEmail Reader,POP Reader,SMTP Sender");
+	gr.query();
+	while (gr.next()) {
+		gr.repeat = "00:00:30";
+		gr.update();
+	}
+
+
+	//clear the email outbox
+	//no need to send any pending emails that were in the production instance from the sub-production one
+	gr = new GlideRecord("sys_email");
+	gr.addEncodedQuery("mailbox=outbox");
+	gr.deleteMultiple();
+
+
+	//enable email sending and receiving
+	//re-enable as cloning will disable it
+	gr = new GlideRecord("sys_properties");
+	gr.addEncodedQuery("name=glide.email.read.active^ORname=glide.email.smtp.active");
+	gr.query();
+	while (gr.next()) {
+		gr.value = "true";
+		gr.update();
+	}
+
+	//was an issue in the past but no longer???
+	//update the clone target property so the instance can be a clone target (gets overridden during the clone)
+	gs.setProperty("glide.db.clone.allow_clone_target", true);
+
+
+	//set the "glide.product.description" property based on the instance suffix and current date to display in the banner frame
+	//get the current date/time then convert to the instance timezone
+	var timeZone = gs.getProperty("glide.sys.default.tz", "US/Pacific");
+	var gdt = GlideDateTime();
+	var tz = Packages.java.util.TimeZone.getTimeZone(timeZone);
+	gdt.setTZ(tz);
+	gs.setProperty("glide.product.description", "*** " + instance + " - Cloned on " + gdt.getDisplayValue().replace(" ", " @ ") + " " + timeZone + " ***");
+
+})();]]></script>
+        <sys_class_name>clone_cleanup_script</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 06:29:49</sys_created_on>
+        <sys_id>5e75f7bcdb4623008096a455ca9619a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Custom - Post-Clone Reset Script</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>clone_cleanup_script_5e75f7bcdb4623008096a455ca9619a7</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 06:29:49</sys_updated_on>
+    </clone_cleanup_script>
+</record_update>

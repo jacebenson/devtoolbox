@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_context_menu">
+    <sys_ui_context_menu action="INSERT_OR_UPDATE">
+        <action_script><![CDATA[(function u_createModuleFromQuery(){
+	//skip the creation unless confirmed by the user
+	if(!confirm("Are you sure you want to create a new Module?\n\nA new record will be created and you will be redirected to it in order to finish its configuration."))
+		return;
+
+	//create the record
+	var gr = new GlideRecord("sys_app_module");
+	gr.initialize();
+	gr.link_type = "LIST";
+	gr.name = g_list.tableName;
+	gr.filter = g_list.getQuery();
+	gr.view_name = g_list.getView();
+	var newModule = gr.insert();
+	//and then redirect the user to the new record
+	var gu = new GlideURL("sys_app_module.do");
+	gu.addParam("sys_id", newModule);
+	window.location = gu.getURL();
+})();]]></action_script>
+        <active>true</active>
+        <comments/>
+        <condition>gs.hasRole("admin")</condition>
+        <do_not_cache>false</do_not_cache>
+        <dynamic_actions_script><![CDATA[/** 
+ * This server-side script is used to dynamically create actions for the context menu, such as the list of available templates 
+ * 
+ * The following variables are available to the script: 
+ *    'g_tableName' the name of the current table 
+ *    'g_listId' the id of the list we are building the context menu for 
+ *    'g_itemName' the name of the UI Context Menu item we are building 
+ *    'g_itemOrder' the order defined in the UI Context Menu item we are building 
+ * 
+ * Add items to the context menu by calling: 
+ *    g_contextMenu.addAction(item_id, label, script_string, order); 
+ */ 
+]]></dynamic_actions_script>
+        <menu>list_header</menu>
+        <name>Create a Module from this Query (scoped)</name>
+        <on_show_script><![CDATA[/**
+ * This client-side script is used to dynamically change the context menu before it is displayed.
+ * It is called before showing the context menu if the Run onShow script flag is checked.
+ *
+ * The following variables are available to the script:
+ *    'g_menu' the context menu that is about to be shown
+ *    'g_item' the current context menu item
+ *    'g_list' the GlideList2 that the script is running against (only valid for List context menus)
+ *    'g_fieldName' the name of the field that the context menu is running against (only valid for List context menus)
+ *    'g_fieldLabel' the label of the field that the context menu is running against (only valid for List context menus)
+ *    'g_sysId' the sys_id of the row or form that the script is running against
+ */
+ 
+]]></on_show_script>
+        <order>1000</order>
+        <parent/>
+        <run_on_show_script>false</run_on_show_script>
+        <sys_class_name>sys_ui_context_menu</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 07:03:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d6fc3f74db8623008096a455ca961913</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Create a Module from this Query (scoped)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_context_menu_d6fc3f74db8623008096a455ca961913</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 07:03:00</sys_updated_on>
+        <table>global</table>
+        <track_selected>false</track_selected>
+        <type>action</type>
+    </sys_ui_context_menu>
+</record_update>

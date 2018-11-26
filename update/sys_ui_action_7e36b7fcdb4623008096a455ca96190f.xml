@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>u_fpc_show_g_scratchpad</action_name>
+        <active>true</active>
+        <client>true</client>
+        <client_script_v2/>
+        <comments>Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne&#13;
+&#13;
+Allows a user with the "admin" role to display what data has been added to the g_scratchpad object.&#13;
+&#13;
+Requires the generic "u_fpc_simple_copy_paste" UI Page to display the results.</comments>
+        <condition>gs.hasRole("admin")</condition>
+        <form_action>true</form_action>
+        <form_button>false</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>true</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint>Displays the contents of the g_scratchpad object in a popup window</hint>
+        <isolate_script>true</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <name>Show Contents of g_scratchpad (scoped)</name>
+        <onclick>u_fpcShowGScratchpad()</onclick>
+        <order>100000</order>
+        <script><![CDATA[function u_fpcShowGScratchpad(){
+	var newLine = "~~~newline~~~";  //will be replaced with line breaks in the UI Page
+	var scratchPad = "";
+	var items = Object.keys(g_scratchpad);
+	items.sort();  //sort the item names alphabetically in case they are not already
+
+	var numberOfItems = items.length;
+	for (var i = 0; i < numberOfItems; i++) {
+		scratchPad += items[i] + " = " + JSON.stringify(g_scratchpad[items[i]]) + newLine;
+	}
+
+	//encode the string so it can be passed to the UI Page properly and then decoded there
+	scratchPad = encodeURIComponent(scratchPad);
+
+	//open the dialog window
+	//var gdw = new GlideDialogWindow("u_fpc_simple_copy_paste");
+	var gdw = new GlideDialogWindow("x_8821_dev_toolbox_u_fpc_simple_copy_paste");
+	gdw.setTitle("Contents of g_scratchpad");
+	gdw.setSize(650, 500);
+	gdw.setPreference("sysparm_text", scratchPad);
+	gdw.render();
+}]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 06:38:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7e36b7fcdb4623008096a455ca96190f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Show Contents of g_scratchpad (scoped)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_action_7e36b7fcdb4623008096a455ca96190f</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 06:49:10</sys_updated_on>
+        <table>task</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

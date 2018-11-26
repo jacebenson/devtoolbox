@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_view">
+    <sys_ui_action_view action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_view</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2018-11-26 06:39:20</sys_created_on>
+        <sys_id>40b7f730db8623008096a455ca9619e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Show Contents of g_scratchpad.Default view</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_ui_action display_value="Show Contents of g_scratchpad (scoped)">7e36b7fcdb4623008096a455ca96190f</sys_ui_action>
+        <sys_ui_view display_value="Default view" name="NULL">Default view</sys_ui_view>
+        <sys_update_name>sys_ui_action_view_40b7f730db8623008096a455ca9619e7</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2018-11-26 06:39:20</sys_updated_on>
+        <visibility>include</visibility>
+    </sys_ui_action_view>
+</record_update>
