@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_8821_dev_toolbox.replace</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>replace</name>
+        <script><![CDATA[var replace = Class.create();
+replace.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	isEnabled: function(){
+		return gs.getProperty('x_8821_dev_toolbox.enable.replace') === "true";
+	},
+	canCRUD: function(table) {
+		var sys_db_object = new GlideRecord('sys_db_object');
+		var query = 'name=' + table + '^create_access=true^delete_access=true^read_access=true^update_access=true';
+		sys_db_object.addEncodedQuery(query);
+		sys_db_object.query();
+		return sys_db_object.hasNext();
+	},
+	jounralText: function() {
+		if(this.isEnabled()){
+			try{
+				var result = {
+					origObj: this.getParameter('sysparm_obj'),
+					success: false
+				};
+				var crud = []; 
+				crud.push(this.canCRUD('sys_journal_field'));
+				crud.push(this.canCRUD('sys_audit'));
+				crud.push(this.canCRUD('sys_history_set'));
+				if(crud.indexOf(false)>=0){
+					var message = '';
+					message += 'Permissions not updated on sys_journal_field, sys_audit, ';
+					message += 'or sys_history_set.  Allow Create, Update, Read, and ';
+					message += 'Delete, to allow journal entry replacement. https://';
+					message += gs.getProperty('instance_name') + '.service-now.com/';
+					message += 'nav_to.do?uri=sys_db_object_list.do?sysparm_query=nameIN';
+					message += 'sys_journal_field,sys_audit,sys_history_set';
+					result.message = message;
+					result.success = false;
+					return JSON.stringify(result);
+				} else {
+					var obj = JSON.parse(result.origObj);
+					result.parsedObj = obj;
+					var sysid = obj.sysid;
+					var word = obj.word;
+					var replacement = obj.replacement;
+					var fields = ['comments', 'work_notes'];
+					var regex = new RegExp(word);
+					if (sysid && word && replacement) {
+						var journal = new GlideRecord('sys_journal_field');
+						journal.addQuery('element_id', sysid);
+						journal.addQuery('element', 'IN', fields);
+						journal.addQuery('value', 'LIKE', word);
+						journal.query();
+						while (journal.next()) {
+							var journalText = journal.getValue('value');
+							var newText = journalText.replace(regex, replacement);
+							journal.setValue('value', journalText.replace(regex, replacement));
+							journal.update();
+							result.journal = journal.getLink();
+						}
+						var audit = new GlideRecord('sys_audit');
+						audit.addQuery('documentkey', sysid);
+						audit.addQuery('fieldname', 'IN', fields);
+						audit.addQuery('newvalue', 'CONTAINS', word);
+						result.auditQuery = audit.getEncodedQuery();
+						audit.query();
+						result.audits = [];
+						while (audit.next()) {
+							var auditText = audit.getValue('newvalue');
+							var newAuditText = auditText.replace(regex, replacement);
+							audit.setValue('newvalue', newAuditText);
+							audit.update();
+							result.audits.push(audit.getLink());
+						}
+						var history = new GlideRecord('sys_history_set');
+						history.addQuery('id', sysid);
+						history.query();
+						if (history.next()) {
+							history.deleteRecord();
+						}
+						result.success = true;
+					} else {
+						result.success = false;
+						result.message = 'Word and replacement must be set.';
+					}
+					return JSON.stringify(result);
+				}
+			} catch (error){
+				gs.error(JSON.stringify(error,'','  '));
+				return JSON.stringify(error);
+			}
+		} else {
+			gs.error('Propery x_8821_glide_utils.enable.replace is not enabled');
+		}
+	},
+	type: 'replace'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-03-29 05:18:05</sys_created_on>
+        <sys_id>4a8081acdb2473007d159235ca961993</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>replace</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_script_include_4a8081acdb2473007d159235ca961993</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-03-29 05:18:05</sys_updated_on>
+    </sys_script_include>
+</record_update>
