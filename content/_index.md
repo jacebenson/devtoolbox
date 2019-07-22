@@ -31,7 +31,8 @@ intro:
 
 about:
     header: "About Scoped Dev Toolbox"
-    text: '<p>Dev Toolbox is a scoped app to capture tests for all the Out of Box servicenow applications. With this you have a place to start your own tests instead of starting from scratch. Once installed you’ll be able to run a batch of tests against the instance. One key detail about all of these tests, they are all self-contained. Meaning, you don’t need to load up any demo users, companies or groups to try these tests. They are all included in this scoped application.</p>
+    text: '<p>Dev Toolbox is a scoped app to capture tests for all the Out of Box servicenow applications. This is a scoped application for Service-now to allow some utilities to be easily added and maintained on instances.
+    </p>
     <div style="text-align:left;padding:10px">
     <h2>Features</h1>
     <ul>
