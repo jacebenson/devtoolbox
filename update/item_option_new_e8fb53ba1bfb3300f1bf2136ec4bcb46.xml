@@ -37,7 +37,7 @@
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
         <name>table</name>
-        <order/>
+        <order>500</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
         <question_text>Table</question_text>
@@ -59,17 +59,17 @@
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-14 05:48:46</sys_created_on>
         <sys_id>e8fb53ba1bfb3300f1bf2136ec4bcb46</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Table</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>item_option_new_e8fb53ba1bfb3300f1bf2136ec4bcb46</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-14 05:48:46</sys_updated_on>
+        <sys_updated_on>2019-09-14 09:33:55</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>18</type>
+        <type>6</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>advanced</use_reference_qualifier>
