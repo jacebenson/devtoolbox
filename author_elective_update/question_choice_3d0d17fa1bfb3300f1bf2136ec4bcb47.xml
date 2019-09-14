@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="DELETE">
+        <misc>0</misc>
+        <order>999</order>
+        <question display_value="What process does this follow?">b3cc9bba1bfb3300f1bf2136ec4bcb22</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 05:52:02</sys_created_on>
+        <sys_id>3d0d17fa1bfb3300f1bf2136ec4bcb47</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>A task</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>question_choice_3d0d17fa1bfb3300f1bf2136ec4bcb47</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 05:55:28</sys_updated_on>
+        <text>A task</text>
+        <value/>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=3d0d17fa1bfb3300f1bf2136ec4bcb47"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>misc</field>
+        <id>3d0d17fa1bfb3300f1bf2136ec4bcb47</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 05:52:02</sys_created_on>
+        <sys_id>5a1d1bfa1bfb3300f1bf2136ec4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 05:52:02</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_misc</field>
+        <id>3d0d17fa1bfb3300f1bf2136ec4bcb47</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 05:52:02</sys_created_on>
+        <sys_id>121d1bfa1bfb3300f1bf2136ec4bcbcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 05:52:02</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</application>
+        <file_path/>
+        <instance_id>dae8cb3fdbcc7f4091232f17d4961983</instance_id>
+        <instance_name>dev74974</instance_name>
+        <name>question_choice_3d0d17fa1bfb3300f1bf2136ec4bcb47</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice"><question_choice action="INSERT_OR_UPDATE"><misc>0</misc><order>999</order><question display_value="What process does this follow?">b3cc9bba1bfb3300f1bf2136ec4bcb22</question><rec_misc>0</rec_misc><sys_class_name>question_choice</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-09-14 05:52:02</sys_created_on><sys_id>3d0d17fa1bfb3300f1bf2136ec4bcb47</sys_id><sys_mod_count>1</sys_mod_count><sys_name>A task</sys_name><sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package><sys_policy/><sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope><sys_update_name>question_choice_3d0d17fa1bfb3300f1bf2136ec4bcb47</sys_update_name><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-09-14 05:55:28</sys_updated_on><text>A task</text><value/></question_choice><fx_price action="delete_multiple" query="id=3d0d17fa1bfb3300f1bf2136ec4bcb47"/><fx_price action="INSERT_OR_UPDATE"><amount>0</amount><currency display_value="USD">USD</currency><field>misc</field><id>3d0d17fa1bfb3300f1bf2136ec4bcb47</id><parent/><reference_amount>0</reference_amount><reference_currency display_value="USD">USD</reference_currency><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-09-14 05:52:02</sys_created_on><sys_id>5a1d1bfa1bfb3300f1bf2136ec4bcbcb</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-09-14 05:52:02</sys_updated_on><table>question_choice</table><type>calculated</type></fx_price><fx_price action="INSERT_OR_UPDATE"><amount>0</amount><currency display_value="USD">USD</currency><field>rec_misc</field><id>3d0d17fa1bfb3300f1bf2136ec4bcb47</id><parent/><reference_amount>0</reference_amount><reference_currency display_value="USD">USD</reference_currency><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-09-14 05:52:02</sys_created_on><sys_id>121d1bfa1bfb3300f1bf2136ec4bcbcb</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-09-14 05:52:02</sys_updated_on><table>question_choice</table><type>calculated</type></fx_price></record_update>]]></payload>
+        <payload_hash>-216575565</payload_hash>
+        <record_name>A task</record_name>
+        <reverted_from/>
+        <source>e6e34aea1b3b3300f1bf2136ec4bcbbe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 05:55:28</sys_created_on>
+        <sys_id>64ed173e1bfb3300f1bf2136ec4bcbe9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16d2e572e0d0000001</sys_recorded_at>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 05:55:28</sys_updated_on>
+        <type>Question Choice</type>
+        <update_guid>aced173e37fb3300fbf2ead2e7d574e8</update_guid>
+        <update_guid_history>aced173e37fb3300fbf2ead2e7d574e8:-216575565,d21d1bfa44fb3300106657aac8cc06cd:1287968907</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="A task">0e1e1f3e1bfb3300f1bf2136ec4bcbd5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 05:56:24</sys_created_on>
+        <sys_db_object display_value="" name="question_choice">question_choice</sys_db_object>
+        <sys_id>0152fab2887b41148004b265dccbfe90</sys_id>
+        <sys_metadata>3d0d17fa1bfb3300f1bf2136ec4bcb47</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>A task</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_parent display_value="What process does this follow?">b3cc9bba1bfb3300f1bf2136ec4bcb22</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_scope_delete display_value="">186d300bf7ad4c60843652e8e89a2900</sys_scope_delete>
+        <sys_update_name>question_choice_3d0d17fa1bfb3300f1bf2136ec4bcb47</sys_update_name>
+        <sys_update_version display_value="question_choice_3d0d17fa1bfb3300f1bf2136ec4bcb47">64ed173e1bfb3300f1bf2136ec4bcbe9</sys_update_version>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 05:56:24</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

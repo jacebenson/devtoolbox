@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	//console.log(c.data.flows);
+	var g_form = $scope.page.g_form;
+	//We are going to simplify accessing g_form within the HTML by setting it as a $scope attribute
+	$scope.g_form = $scope.page.g_form;
+	g_form.setDisplay('flow',false);
+	c.setVariable = function(val){
+		try{
+			g_form.setValue('flow', c.data.flow);
+			if(c.data.flow != ''){
+				$('#flow-image').attr('src', c.data.flow + '.png');
+				$('#flow-image').show();
+			} else {
+				$('#flow-image').hide();
+			}
+		} catch (error){
+			console.log('g_form does not exist');
+		}
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>#flow-image {
+    max-width: 800px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>flow-visual</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>flow-visual</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	// https://dev74974.service-now.com/question_choice_list.do?sysparm_query=question%3Db3cc9bba1bfb3300f1bf2136ec4bcb22&sysparm_view=
+	data.flows = [];
+	var flowsGR = new GlideRecord('question_choice');
+	flowsGR.addQuery('question', 'b3cc9bba1bfb3300f1bf2136ec4bcb22');
+	flowsGR.orderBy('order');
+	flowsGR.query();
+	while(flowsGR.next()){
+		data.flows.push({
+			'name': flowsGR.getValue('text'),
+			'value': flowsGR.getValue('value')
+		});
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:00:38</sys_created_on>
+        <sys_id>c41f937e1bfb3300f1bf2136ec4bcb90</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>flow-visual</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sp_widget_c41f937e1bfb3300f1bf2136ec4bcb90</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 06:49:08</sys_updated_on>
+        <template><![CDATA[<div>
+<!-- your widget template -->
+
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="selectbasic">What process will this item follow?</label>
+    <div class="col-md-12">
+      <select 
+              ng-model="c.data.flow" 
+              ng-change="c.setVariable()" 
+              id="flow" 
+              name="flow" 
+              class="form-control">
+        <option value="">Pick one</option>
+        <option ng-repeat="flow in c.data.flows" value="{{flow.value}}">{{flow.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <img id="flow-image" />
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

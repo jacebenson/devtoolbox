@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="io_set_item">
+    <io_set_item action="DELETE">
+        <order>100</order>
+        <sc_cat_item display_value="Request a new catalog item">269797b21bfb3300f1bf2136ec4bcbc3</sc_cat_item>
+        <sys_class_name>io_set_item</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:51:23</sys_created_on>
+        <sys_id>ff8a6b3e1b3f3300f1bf2136ec4bcbb1</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Process.Request a new catalog item</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>io_set_item_ff8a6b3e1b3f3300f1bf2136ec4bcbb1</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 06:51:23</sys_updated_on>
+        <variable_set display_value="Process">529aaffa1b3f3300f1bf2136ec4bcb8c</variable_set>
+    </io_set_item>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</application>
+        <file_path/>
+        <instance_id>dae8cb3fdbcc7f4091232f17d4961983</instance_id>
+        <instance_name>dev74974</instance_name>
+        <name>io_set_item_ff8a6b3e1b3f3300f1bf2136ec4bcbb1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="io_set_item"><io_set_item action="INSERT_OR_UPDATE"><order>100</order><sc_cat_item display_value="Request a new catalog item">269797b21bfb3300f1bf2136ec4bcbc3</sc_cat_item><sys_class_name>io_set_item</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-09-14 06:51:23</sys_created_on><sys_id>ff8a6b3e1b3f3300f1bf2136ec4bcbb1</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Process.Request a new catalog item</sys_name><sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package><sys_policy/><sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope><sys_update_name>io_set_item_ff8a6b3e1b3f3300f1bf2136ec4bcbb1</sys_update_name><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-09-14 06:51:23</sys_updated_on><variable_set display_value="Process">529aaffa1b3f3300f1bf2136ec4bcb8c</variable_set></io_set_item></record_update>]]></payload>
+        <payload_hash>-173647028</payload_hash>
+        <record_name>Process.Request a new catalog item</record_name>
+        <reverted_from/>
+        <source>e6e34aea1b3b3300f1bf2136ec4bcbbe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:51:23</sys_created_on>
+        <sys_id>33aa673e1b3f3300f1bf2136ec4bcb69</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16d2e8a61bb0000001</sys_recorded_at>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 06:51:23</sys_updated_on>
+        <type>Catalog Variable Set</type>
+        <update_guid>7baa673e0f3f330093963c3bf7c3a768</update_guid>
+        <update_guid_history>7baa673e0f3f330093963c3bf7c3a768:-173647028</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Process.Request a new catalog item">2949b3721bbf3300f1bf2136ec4bcb46</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 07:55:09</sys_created_on>
+        <sys_db_object display_value="" name="io_set_item">io_set_item</sys_db_object>
+        <sys_id>8a4222284cb8483891653b61889dc5f1</sys_id>
+        <sys_metadata>ff8a6b3e1b3f3300f1bf2136ec4bcbb1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Process.Request a new catalog item</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_scope_delete display_value="">186d300bf7ad4c60843652e8e89a2900</sys_scope_delete>
+        <sys_update_name>io_set_item_ff8a6b3e1b3f3300f1bf2136ec4bcbb1</sys_update_name>
+        <sys_update_version display_value="io_set_item_ff8a6b3e1b3f3300f1bf2136ec4bcbb1">33aa673e1b3f3300f1bf2136ec4bcb69</sys_update_version>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 07:55:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

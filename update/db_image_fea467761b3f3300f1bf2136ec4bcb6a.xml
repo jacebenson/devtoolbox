@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>sc</category>
+        <format>png</format>
+        <height>91</height>
+        <image>694523f21b3f3300f1bf2136ec4bcbf5</image>
+        <name>0-approval-1-task.png</name>
+        <size_bytes>2215</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:27:37</sys_created_on>
+        <sys_id>fea467761b3f3300f1bf2136ec4bcb6a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>0-approval-1-task.png</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>db_image_fea467761b3f3300f1bf2136ec4bcb6a</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 06:27:45</sys_updated_on>
+        <thumbnail/>
+        <width>348</width>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#5fa0da</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/png</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <hash>0cc647ecd455b45c557476256abd1fbfc1ebd17d8448b36faed0dd545afabbee</hash>
+        <image_height>91</image_height>
+        <image_width>348</image_width>
+        <size_bytes>2215</size_bytes>
+        <size_compressed>1967</size_compressed>
+        <state>available</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:27:45</sys_created_on>
+        <sys_id>694523f21b3f3300f1bf2136ec4bcbf5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>guest</sys_updated_by>
+        <sys_updated_on>2019-09-14 06:27:46</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>fea467761b3f3300f1bf2136ec4bcb6a</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="694523f21b3f3300f1bf2136ec4bcbf5">694523f21b3f3300f1bf2136ec4bcbf5</sys_attachment>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:27:45</sys_created_on>
+        <sys_id>a94523f21b3f3300f1bf2136ec4bcbf5</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>2612</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="694523f21b3f3300f1bf2136ec4bcbf5">694523f21b3f3300f1bf2136ec4bcbf5</sys_attachment>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 06:27:45</sys_created_on>
+        <sys_id>2d4523f21b3f3300f1bf2136ec4bcbf5</sys_id>
+    </sys_attachment_doc>
+</record_update>
