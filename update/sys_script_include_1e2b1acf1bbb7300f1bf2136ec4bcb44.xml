@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_8821_dev_toolbox.itemProcess</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>itemProcess</name>
+        <script><![CDATA[var itemProcess = Class.create();
+itemProcess.prototype = {
+    initialize: function() {
+    },
+	basicAuth: gs.getProperty('x_8821_dev_toolbox.InstanceBasicAuth'),
+	remoteInstance: gs.getProperty('x_8821_dev_toolbox.InstanceCreateItem'),
+	forceAllThingsToUpdateSet: function(){
+		//I dont think I can remotely make
+		//and set items in the update set.
+		//So I'll just make the things below,
+		//and add a ui action on the item, to 
+		//add all parts to Update Set, whcih will
+		//use GlideUpdateManager2().saveRecord
+		//but.. this isnt available to scope...
+		//so instead will force update of updated
+		//for the item, its variables, their options
+		//we'll force update.
+	},
+	restCall: function(){
+		
+		var restMessage = new sn_ws.RESTMessageV2();
+		//restMessage.setBasicAuth();
+		restMessage.setHttpMethod("post");
+		restMessage.setEndpoint(this.remoteInstance + "api/now/table/incident");
+		restMessage.setRequestBody(JSON.stringify(requestBody));
+		var response = restMessage.execute();
+		var error = response.haveError();
+		if(error){
+			var errorCode = response.getErrorCode();
+			var errorMsg = response.getErrorMessage();
+		} else {
+			//
+		}
+	},
+	createItem: function(){
+		//create the item, do not check if one exists.
+		
+	},
+	createGroups: function(){
+		//look for the group, if it exists, return the sysid
+		//if not found make the group, then get the list of members and add them in dev,
+		//and return the sysid
+	},
+	createVariables: function(){
+		//create the variables,
+		//create the options
+	},
+    type: 'itemProcess'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-14 20:34:26</sys_created_on>
+        <sys_id>1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>itemProcess</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_script_include_1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-14 20:35:10</sys_updated_on>
+    </sys_script_include>
+</record_update>
