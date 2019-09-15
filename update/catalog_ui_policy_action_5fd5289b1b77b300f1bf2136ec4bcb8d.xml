@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
     <catalog_ui_policy_action action="INSERT_OR_UPDATE">
         <catalog_item/>
-        <catalog_variable>IO:e8fb53ba1bfb3300f1bf2136ec4bcb46</catalog_variable>
+        <catalog_variable>IO:c325e05b1b77b300f1bf2136ec4bcb1c</catalog_variable>
         <cleared>false</cleared>
         <disabled>false</disabled>
         <field/>
@@ -9,19 +9,19 @@
         <order>100</order>
         <sys_class_name>catalog_ui_policy_action</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
-        <sys_created_on>2019-09-14 09:27:19</sys_created_on>
-        <sys_id>224e80431b337300f1bf2136ec4bcb01</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>table</sys_name>
+        <sys_created_on>2019-09-15 05:48:42</sys_created_on>
+        <sys_id>5fd5289b1b77b300f1bf2136ec4bcb8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>choices</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
-        <sys_update_name>catalog_ui_policy_action_224e80431b337300f1bf2136ec4bcb01</sys_update_name>
+        <sys_update_name>catalog_ui_policy_action_5fd5289b1b77b300f1bf2136ec4bcb8d</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-15 05:49:12</sys_updated_on>
+        <sys_updated_on>2019-09-15 05:48:42</sys_updated_on>
         <table/>
-        <ui_policy display_value="If Reference show Table and Ref Qual">1ffd40031b337300f1bf2136ec4bcbae</ui_policy>
-        <variable>table</variable>
+        <ui_policy display_value="If select, radios, require choices">1295205b1b77b300f1bf2136ec4bcbce</ui_policy>
+        <variable>choices</variable>
         <variable_set display_value="Questions">510993761bfb3300f1bf2136ec4bcbb3</variable_set>
         <visible>ignore</visible>
     </catalog_ui_policy_action>

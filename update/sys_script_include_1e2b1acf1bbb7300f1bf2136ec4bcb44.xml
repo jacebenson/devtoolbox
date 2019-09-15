@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
+        <access>public</access>
         <active>true</active>
         <api_name>x_8821_dev_toolbox.itemProcess</api_name>
         <caller_access/>
@@ -9,64 +9,126 @@
         <name>itemProcess</name>
         <script><![CDATA[var itemProcess = Class.create();
 itemProcess.prototype = {
-    initialize: function() {
-    },
-	basicAuth: gs.getProperty('x_8821_dev_toolbox.InstanceBasicAuth'),
-	remoteInstance: gs.getProperty('x_8821_dev_toolbox.InstanceCreateItem'),
-	forceAllThingsToUpdateSet: function(){
-		//I dont think I can remotely make
-		//and set items in the update set.
-		//So I'll just make the things below,
-		//and add a ui action on the item, to 
-		//add all parts to Update Set, whcih will
-		//use GlideUpdateManager2().saveRecord
-		//but.. this isnt available to scope...
-		//so instead will force update of updated
-		//for the item, its variables, their options
-		//we'll force update.
+	initialize: function() {
 	},
-	restCall: function(){
-		
+	basicAuthObj: JSON.parse(gs.getProperty('x_8821_dev_toolbox.InstanceBasicAuth')),
+	remoteInstance: gs.getProperty('x_8821_dev_toolbox.InstanceCreateItem'),
+	restCall: function(obj){
+		/*{
+		  "method":"get",
+		  "endpoint": "api/now/table/???",
+		  "body": "JSON stringified obj"
+		}*/
+		var returnObj = {};
 		var restMessage = new sn_ws.RESTMessageV2();
-		//restMessage.setBasicAuth();
-		restMessage.setHttpMethod("post");
-		restMessage.setEndpoint(this.remoteInstance + "api/now/table/incident");
-		restMessage.setRequestBody(JSON.stringify(requestBody));
+		restMessage.setBasicAuth(this.basicAuthObj.username, this.basicAuthObj.password);
+		restMessage.setRequestHeader("Accept", "application/json");
+		restMessage.setRequestHeader("Content-Type", "application/json");
+		restMessage.setHttpMethod(obj.method);
+		restMessage.setEndpoint(this.remoteInstance + obj.endpoint);
+		restMessage.setRequestBody(JSON.stringify(obj.body));
 		var response = restMessage.execute();
 		var error = response.haveError();
+		returnObj.endpoint = restMessage.getEndpoint();
+		returnObj.queryString = response.getQueryString();
 		if(error){
-			var errorCode = response.getErrorCode();
-			var errorMsg = response.getErrorMessage();
+			returnObj.errorCode = response.getErrorCode();
+			returnObj.errorMsg = response.getErrorMessage();
 		} else {
-			//
+			// no error
+			returnObj.body = response.getBody();
+			returnObj.statusCode = response.getStatusCode();
 		}
+		return returnObj;
 	},
-	createItem: function(){
-		//create the item, do not check if one exists.
-		
+	createChoices: function(sysid, choices){
+		//create choices;
 	},
-	createGroups: function(){
-		//look for the group, if it exists, return the sysid
-		//if not found make the group, then get the list of members and add them in dev,
-		//and return the sysid
-	},
-	createVariables: function(){
+	createVariables: function(sysid, questions){
 		//create the variables,
 		//create the options
+		questions.forEach(function(question, order){
+			question.type = question.type || '';
+			question.order = order * 100 + 100;
+			question.question = question.question || '';
+			question.default_value = question || '';
+			question.reference_qualifer = question.reference_qualifer || '';
+			question.table = question.table || '';
+			question.choices = question.choices || '';
+			var modifiedQuestion = {
+				type: question.type.toString(),
+				order: question.order.toString(),
+				question_text: question.question.toString(),
+				name: question.question.toLowerCase().replace(/[^a-z0-9+]+/gi, '_'),
+				default_value: question.default_value.toString(),
+				reference_qual: question.reference_qualifer.toString(),
+				reference: question.table.toString(),
+				use_reference_qualifier: 'advanced',
+				lookup_table: question.table.toString(),
+				lookup_value: 'sys_id',
+				lookup_label: (function(){
+					if(question.table!=""){
+						var qtableGR = new GlideRecord(question.table);
+						return qtableGR.getDisplayName();
+					} else {
+						return "";
+					}
+				})(),
+				list_table: question.table.toString(),
+				cat_item: sysid
+			};
+			var ip = new x_8821_dev_toolbox.itemProcess();
+			var post = ip.restCall({
+				"method": "post",
+				"endpoint": "api/now/table/item_option_new",
+				"body": modifiedQuestion
+			});
+			var questionSysid = JSON.parse(post.body).result.sys_id;
+			var choices = question.choices.toString().split(',') || '';
+			//this.createChoices(questionSysid, choices);
+			
+			choices.forEach(function(choice, index){
+				var postChoice = ip.restCall({
+					"method": "post",
+					"endpoint": "api/now/table/question_choice",
+					"body": {
+						"text": choice.toString(),
+						"value": choice.toString().toLowerCase(),
+						"order": (parseInt(index,10)*100) + 100,
+						"question": questionSysid
+					}
+				});
+			});
+		});
 	},
-    type: 'itemProcess'
+	createItem: function(item, vars){
+		//create the item, do not check if one exists.
+		item.active = true;
+		item.availability = 'on_both';
+		item.type = 'item';
+		item.hide_sp = "false";
+		var post = this.restCall({
+			"method": "post",
+			"endpoint": "api/now/table/sc_cat_item",
+			"body": item
+		});
+		var variables = JSON.parse(vars);
+		var sys_id = JSON.parse(post.body).result.sys_id;
+		this.createVariables(sys_id, variables);
+	},
+	type: 'itemProcess'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-14 20:34:26</sys_created_on>
         <sys_id>1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>40</sys_mod_count>
         <sys_name>itemProcess</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_script_include_1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-14 20:35:10</sys_updated_on>
+        <sys_updated_on>2019-09-15 08:11:33</sys_updated_on>
     </sys_script_include>
 </record_update>
