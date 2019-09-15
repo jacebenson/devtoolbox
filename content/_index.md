@@ -36,6 +36,7 @@ about:
     <div style="text-align:left;padding:10px">
     <h2>Features</h1>
     <ul>
+    <li>Standard Catalog Item generation</li>
     <li>Rewrite Journal content</li>
     <li>Variable Helper</li>
     <li>Add Data to Table</li>
@@ -73,6 +74,16 @@ about:
     &nbsp;&nbsp;}<br/>
     })(current, template, email, email_action, event);
     </code>
+    <h2>Standard Catalog Item generation</h2>
+    <p>What does this even mean?!</p>
+    <p>Well, here's the thing.  I don't know about you, but I find nearly 80% of all
+    my catalog work is a simple, make an item that has 0-2 approvals, and 1-2 tasks
+    eitehr in line or in parrellel.</p>
+    <p>So how does that help me?</p>
+    <p>I've created an item that lets the user define the inputs of the item, its workflow,
+    and this generates all that as someone in your development environment.  I'm still working on the 
+    "Put all of it into an update set" and the part where it uses the variables to move/progress the workflow
+    properly.  But its happening</p>  
     </div>
     '
 
