@@ -74,16 +74,24 @@ about:
     &nbsp;&nbsp;}<br/>
     })(current, template, email, email_action, event);
     </code>
-    <h2>Standard Catalog Item generation</h2>
-    <p>What does this even mean?!</p>
-    <p>Well, here's the thing.  I don't know about you, but I find nearly 80% of all
+
+    
+    
+    <h2> Standard Catalog Item generation </h2>
+    <p>What does this even mean</p>
+    <p>Well, here is the thing.  I do not know about you, but I find nearly 80% of all
     my catalog work is a simple, make an item that has 0-2 approvals, and 1-2 tasks
     eitehr in line or in parrellel.</p>
-    <p>So how does that help me?</p>
-    <p>I've created an item that lets the user define the inputs of the item, its workflow,
-    and this generates all that as someone in your development environment.  I'm still working on the 
+    <p>So how does that help me</p>
+    <p>I have created an item that lets the user define the inputs of the item, its workflow,
+    and this generates all that as someone in your development environment.  I am still working on the 
     "Put all of it into an update set" and the part where it uses the variables to move/progress the workflow
     properly.  But its happening</p>  
+    
+    <img src="screenshot.gif"/>
+    <video src="item.mp4" controls poster="poster.jpg">
+    </video>
+
     </div>
     '
 
