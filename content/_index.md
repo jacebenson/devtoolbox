@@ -87,8 +87,7 @@ about:
     and this generates all that as someone in your development environment.  I am still working on the 
     "Put all of it into an update set" and the part where it uses the variables to move/progress the workflow
     properly.  But its happening</p>  
-    
-    <img src="screenshot.gif"/>
+
     <video src="item.mp4" controls poster="poster.jpg">
     </video>
 
