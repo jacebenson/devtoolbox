@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
+    <catalog_ui_policy_action action="DELETE">
+        <catalog_item display_value="Request a new catalog item">269797b21bfb3300f1bf2136ec4bcbc3</catalog_item>
+        <catalog_variable>IO:b3cc9bba1bfb3300f1bf2136ec4bcb22</catalog_variable>
+        <cleared>false</cleared>
+        <disabled>true</disabled>
+        <field/>
+        <mandatory>true</mandatory>
+        <order>100</order>
+        <sys_class_name>catalog_ui_policy_action</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-16 07:18:52</sys_created_on>
+        <sys_id>c71406a71b333700f1bf2136ec4bcb49</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>flow</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>catalog_ui_policy_action_c71406a71b333700f1bf2136ec4bcb49</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-16 07:20:20</sys_updated_on>
+        <table/>
+        <ui_policy display_value="Make mandatory?">f00442a71b333700f1bf2136ec4bcbe7</ui_policy>
+        <variable>flow</variable>
+        <variable_set/>
+        <visible>ignore</visible>
+    </catalog_ui_policy_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</application>
+        <file_path/>
+        <instance_id>dae8cb3fdbcc7f4091232f17d4961983</instance_id>
+        <instance_name>dev74974</instance_name>
+        <name>catalog_ui_policy_action_c71406a71b333700f1bf2136ec4bcb49</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action"><catalog_ui_policy_action action="INSERT_OR_UPDATE"><catalog_item display_value="Request a new catalog item">269797b21bfb3300f1bf2136ec4bcbc3</catalog_item><catalog_variable>IO:b3cc9bba1bfb3300f1bf2136ec4bcb22</catalog_variable><cleared>false</cleared><disabled>true</disabled><field/><mandatory>true</mandatory><order>100</order><sys_class_name>catalog_ui_policy_action</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-09-16 07:18:52</sys_created_on><sys_id>c71406a71b333700f1bf2136ec4bcb49</sys_id><sys_mod_count>2</sys_mod_count><sys_name>flow</sys_name><sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package><sys_policy/><sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope><sys_update_name>catalog_ui_policy_action_c71406a71b333700f1bf2136ec4bcb49</sys_update_name><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-09-16 07:20:20</sys_updated_on><table/><ui_policy display_value="Make mandatory?">f00442a71b333700f1bf2136ec4bcbe7</ui_policy><variable>flow</variable><variable_set/><visible>ignore</visible></catalog_ui_policy_action></record_update>]]></payload>
+        <payload_hash>-1659880266</payload_hash>
+        <record_name>flow</record_name>
+        <reverted_from/>
+        <source>e6e34aea1b3b3300f1bf2136ec4bcbbe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-16 07:20:20</sys_created_on>
+        <sys_id>8f7446a71b333700f1bf2136ec4bcbfa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16d38f198f40000001</sys_recorded_at>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-16 07:20:20</sys_updated_on>
+        <type>Catalog UI Policy Action</type>
+        <update_guid>c77446a7ad333700e19ebdd9e529d4fa</update_guid>
+        <update_guid_history>c77446a7ad333700e19ebdd9e529d4fa:-1659880266,1a5486a76d333700bf32280b6c4abe82:766551730,e1244e67da333700c8bb2801980599a2:1489664912</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="flow">f8a48aa71b333700f1bf2136ec4bcb5b</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-16 07:21:00</sys_created_on>
+        <sys_db_object display_value="" name="catalog_ui_policy_action">catalog_ui_policy_action</sys_db_object>
+        <sys_id>3ea1906c93de4f1a90fc3cf5d20e4541</sys_id>
+        <sys_metadata>c71406a71b333700f1bf2136ec4bcb49</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>flow</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_scope_delete display_value="">186d300bf7ad4c60843652e8e89a2900</sys_scope_delete>
+        <sys_update_name>catalog_ui_policy_action_c71406a71b333700f1bf2136ec4bcb49</sys_update_name>
+        <sys_update_version display_value="catalog_ui_policy_action_c71406a71b333700f1bf2136ec4bcb49">8f7446a71b333700f1bf2136ec4bcbfa</sys_update_version>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-16 07:21:00</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
