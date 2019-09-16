@@ -90,7 +90,31 @@ about:
 
     <video src="item.mp4" controls poster="poster.jpg">
     </video>
+    The way this works.
 
+    <ol>
+    <li>Two properties.
+      <ul>
+        <li>`x_8821_dev_toolbox.InstanceBasicAuth` - Expects a JSON obj with username and password</li>
+        <li>`x_8821_dev_toolbox.InstanceCreateItem` - Expects a full url with trailing `/`</li>
+      </ul>
+    </li>
+    <li>You request the item, it makes Table API calls to the `sc_cat_item`, `item_option_new`, and `question_choice` tables to create the item.
+    </li>
+    <li>It also makes a call to the Table API to the `catalog_script_client` to make the "task variables" read only and hidden as they don't need to be on the forms.
+    <li>When the item is created it associates to one the workflows listed in the scope.  Those workflows use the variables;
+    <ul>
+    <li>`approval_1_group`</li>
+    <li>`approval_2_group`</li>
+    <li>`task_1_group`</li>
+    <li>`task_1_short_description`</li>
+    <li>`task_1_description`</li>
+    <li>`task_2_group`</li>
+    <li>`task_2_short_description`</li>
+    <li>`task_2_description`</li>
+    </ul>
+    </li>
+    To run the selected workflows.
     </div>
     '
 
