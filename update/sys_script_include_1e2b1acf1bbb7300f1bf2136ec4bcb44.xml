@@ -14,6 +14,7 @@ itemProcess.prototype = {
 	basicAuthObj: JSON.parse(gs.getProperty('x_8821_dev_toolbox.InstanceBasicAuth')),
 	remoteInstance: gs.getProperty('x_8821_dev_toolbox.InstanceCreateItem'),
 	restCall: function(obj){
+		gs.info('restCall:' + JSON.stringify(obj,'',' '));
 		/*{
 		  "method":"get",
 		  "endpoint": "api/now/table/???",
@@ -39,69 +40,170 @@ itemProcess.prototype = {
 			returnObj.body = response.getBody();
 			returnObj.statusCode = response.getStatusCode();
 		}
+		if(arguments.length>1){
+			arguments[1](returnObj);
+		}
 		return returnObj;
 	},
 	createChoices: function(sysid, choices){
 		//create choices;
 	},
-	createVariables: function(sysid, questions){
-		//create the variables,
-		//create the options
-		questions.forEach(function(question, order){
-			question.type = question.type || '';
-			question.order = order * 100 + 100;
-			question.question = question.question || '';
-			question.default_value = question.default_value || '';
-			question.reference_qualifer = question.reference_qualifer || '';
-			question.table = question.table || '';
-			question.choices = question.choices || '';
-			var modifiedQuestion = {
-				type: question.type.toString(),
-				order: question.order.toString(),
-				question_text: question.question.toString(),
-				name: question.question.toLowerCase().replace(/[^a-z0-9+]+/gi, '_'),
-				default_value: question.default_value.toString(),
-				reference_qual: question.reference_qualifer.toString(),
-				reference: question.table.toString(),
-				use_reference_qualifier: 'advanced',
-				lookup_table: question.table.toString(),
-				lookup_value: 'sys_id',
-				lookup_label: (function(){
-					if(question.table!=""){
-						var qtableGR = new GlideRecord(question.table);
-						return qtableGR.getDisplayName();
-					} else {
-						return "";
-					}
-				})(),
-				list_table: question.table.toString(),
-				cat_item: sysid
-			};
-			var ip = new x_8821_dev_toolbox.itemProcess();
+	createVariables: function(sysid, currentGR){
+		try{
+			gs.info('in createvariables with these:\n' + currentGR.variables.questions);
+			gs.info('in createvariables with sysid:' + sysid);
+			var questions = JSON.parse(current.variables.questions);
+			//create the variables,
+			//create the options
+			/*
+				for ecah task and approavla, add a new variable
+				create UI policy to hide the variables
+			*/
+			questions.push({
+				type: "8",//reference
+				question: "Approval 1 Group",
+				default_value: currentGR.variables.approval_1_group.toString(),
+				table: "sys_user_group"
+			});
+			questions.push({
+				type: "8",//reference
+				question: "Approval 2 Group",
+				default_value: currentGR.variables.approval_2_group.toString(),
+				table: "sys_user_group"
+			});
+			questions.push({
+				type: "8",//reference
+				question: "Task 1 Group",
+				default_value: currentGR.variables.task_1_group.toString(),
+				table: "sys_user_group"
+			});
+			questions.push({
+				type: "6",//single line text
+				question: "Task 1 Short Description",
+				default_value: currentGR.variables.task_1_short_description.toString(),
+			});
+			questions.push({
+				type: "2",//multi line text
+				question: "Task 1 Description",
+				default_value: currentGR.variables.task_1_description.toString(),
+			});
+			questions.push({
+				type: "8",//reference
+				question: "Task 2 Group",
+				default_value: currentGR.variables.task_2_group.toString(),
+				table: "sys_user_group"
+			});
+			questions.push({
+				type: "6",//single line text
+				question: "Task 2 Short Description",
+				default_value: currentGR.variables.task_2_short_description.toString(),
+			});
+			questions.push({
+				type: "2",//multi line text
+				question: "Task 2 Description",
+				default_value: currentGR.variables.task_2_description.toString(),
+			});
+			//task 1 group
+			//task 1 sh desc
+			//task 1 desc
+			//task 2 group
+			//task 2 sh desc
+			//task 2 desc
+			questions.forEach(function(question, order){
+				question.type = question.type || '';
+				question.order = order * 100 + 100;
+				question.question = question.question || '';
+				question.default_value = question.default_value || '';
+				question.reference_qualifer = question.reference_qualifer || '';
+				question.table = question.table || '';
+				question.choices = question.choices || '';
+				var modifiedQuestion = {
+					cat_item: sysid.toString(),
+					type: question.type.toString(),
+					order: question.order.toString(),
+					question_text: question.question.toString(),
+					name: question.question.toLowerCase().replace(/[^a-z0-9+]+/gi, '_'),
+					default_value: question.default_value.toString(),
+					reference_qual: question.reference_qualifer.toString(),
+					reference: question.table.toString(),
+					use_reference_qualifier: 'advanced',
+					list_table: question.table.toString(),
+					lookup_table: question.table.toString(),
+					lookup_value: 'sys_id',
+					lookup_label: (function(){
+						// if table is not empty, get the tables display column's name
+						if(question.table!=""){
+							var qtableGR = new GlideRecord(question.table);
+							return qtableGR.getDisplayName();
+						} else {
+							return "";
+						}
+					})()
+				};
+				var ip = new x_8821_dev_toolbox.itemProcess();
+				var questionSysid = JSON.parse(post.body).result.sys_id;
+				if(question.type == "5" || question.type=="3"){
+					//select or radio
+					var choices = question.choices.toString().split(',') || '';
+					//this.createChoices(questionSysid, choices);
+
+					choices.forEach(function(choice, index){
+						var postChoice = ip.restCall({
+							"method": "post",
+							"endpoint": "api/now/table/question_choice",
+							"body": {
+								"text": choice.toString(),
+								"value": choice.toString().toLowerCase(),
+								"order": (parseInt(index,10)*100) + 100,
+								"question": questionSysid
+							}
+						});
+					});
+				}
+			});
 			var post = ip.restCall({
 				"method": "post",
 				"endpoint": "api/now/table/item_option_new",
 				"body": modifiedQuestion
 			});
-			var questionSysid = JSON.parse(post.body).result.sys_id;
-			var choices = question.choices.toString().split(',') || '';
-			//this.createChoices(questionSysid, choices);
-			
-			choices.forEach(function(choice, index){
-				var postChoice = ip.restCall({
-					"method": "post",
-					"endpoint": "api/now/table/question_choice",
-					"body": {
-						"text": choice.toString(),
-						"value": choice.toString().toLowerCase(),
-						"order": (parseInt(index,10)*100) + 100,
-						"question": questionSysid
-					}
-				});
+			var script = "";
+			script += "function onLoad() {\n";
+			script += "  var variables = [\n";
+			script += "		'approval_1_group',\n";
+			script += "		'approval_2_group',\n";
+			script += "		'task_1_group',\n";
+			script += "		'task_1_short_description',\n";
+			script += "		'task_1_description',\n";
+			script += "		'task_2_group',\n";
+			script += "		'task_2_short_description',\n";
+			script += "		'task_2_description'\n";
+			script += "	].forEach(function(question){\n";
+			script += "		g_form.setDisplay(question, false);\n";
+			script += "		g_form.setReadOnly(question, true);\n";
+			script += "	});\n";
+			script += "}";
+			var postClientScript = ip.restCall({
+				"method": "post",
+				"endpoint": "api/now/table/catalog_script_client",
+				"body": {
+					"name":"Hide assignment variables",
+					"ui_type": "10",//both mobile and desktop
+					"type": "onLoad",
+					"applies_to": "item",
+					"cat_item":sysid.toString(),
+					"applies_catalog": "true",
+					"applies_req_item": "true",
+					"applies_sc_task": "true",
+					"script": script
+				}
 			});
-		});
+		} catch(error){
+			gs.error(JSON.stringify(error,'',' '));
+		}
 	},
-	createItem: function(item, vars){
+	createItem: function(item, currentGR){
+		gs.info('in createitem');
+		item = JSON.parse(item);
 		//create the item, do not check if one exists.
 		item.active = true;
 		item.availability = 'on_both';
@@ -111,10 +213,12 @@ itemProcess.prototype = {
 			"method": "post",
 			"endpoint": "api/now/table/sc_cat_item",
 			"body": item
+		}, function(response){
+			gs.info('in callback');
+			//var variables = JSON.parse(vars);
+			var sys_id = JSON.parse(response.body).result.sys_id;
+			gs.eventQueue('x_8821_dev_toolbox.createVariables', currentGR, sys_id, currentGR.number);
 		});
-		var variables = JSON.parse(vars);
-		var sys_id = JSON.parse(post.body).result.sys_id;
-		this.createVariables(sys_id, variables);
 	},
 	type: 'itemProcess'
 };]]></script>
@@ -122,13 +226,13 @@ itemProcess.prototype = {
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-14 20:34:26</sys_created_on>
         <sys_id>1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_id>
-        <sys_mod_count>41</sys_mod_count>
+        <sys_mod_count>73</sys_mod_count>
         <sys_name>itemProcess</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_script_include_1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-15 08:14:48</sys_updated_on>
+        <sys_updated_on>2019-09-16 06:31:39</sys_updated_on>
     </sys_script_include>
 </record_update>

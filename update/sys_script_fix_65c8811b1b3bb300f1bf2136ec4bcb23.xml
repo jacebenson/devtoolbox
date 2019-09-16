@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <before>false</before>
+        <description/>
+        <flush_cache>false</flush_cache>
+        <name>Working script to make item</name>
+        <record_for_rollback>false</record_for_rollback>
+        <run_once>true</run_once>
+        <script><![CDATA[try{
+	var current = new GlideRecord('sc_req_item');
+	current.get('627bd4271b3bf300f1bf2136ec4bcb9d');
+
+	//gs.print(current.variables.questions.toString());
+	var ip = new x_8821_dev_toolbox.itemProcess();
+	var vars = current.variables;
+	if(vars.flow == "" ){
+		vars.flow = "0-approval-1-task";
+	}
+	var workflows = {
+		"0-approval-1-task"          : "bbb388cf1bbf3300f1bf2136ec4bcbe3",
+		"0-approval-2-task-parallel" : "51750c431bff3300f1bf2136ec4bcb27",
+		"0-approval-2-task-serial"   : "79f444431bff3300f1bf2136ec4bcb16",
+		"1-approval-1-task"          : "79f788471bff3300f1bf2136ec4bcb7f",
+		"1-approval-2-task-parallel" : "c7c5c8831bff3300f1bf2136ec4bcb45",
+		"1-approval-2-task-serial"   : "d0a688c31bff3300f1bf2136ec4bcb63",
+		"2-approval-1-task"          : "91a8cc471bff3300f1bf2136ec4bcbf9",
+		"2-approval-2-task-parallel" : "9848cc471bff3300f1bf2136ec4bcbbe",
+		"2-approval-2-task-serial"   : "d5878c071bff3300f1bf2136ec4bcb4b"
+	};
+	//gs.print(vars.flow.toString());
+	ip.createItem(JSON.stringify({
+		"description": vars.html.toString() || '', 
+		"short_description": vars.name.toString() || '', 
+		"group": vars.owner.toString() || '', 
+		"meta": vars.meta.toString() || '', 
+		"name": vars.name.toString() || '',
+		"workflow": workflows[vars.flow.toString()]
+	}), current);
+
+} catch (error){
+	gs.error(JSON.stringify(error,'',' '));
+}
+/*
+var ip = new x_8821_dev_toolbox.itemProcess();
+var itemGR = new GlideRecord('sc_req_item');
+itemGR.get('6294385f1bb7b300f1bf2136ec4bcb21');
+itemGR.variables.questions;
+var sysid = 'f2947c1fdbb37b40f877aab35b9619b2';
+var questions = JSON.parse(itemGR.variables.questions);
+questions;
+questions.forEach(function(question){
+  gs.print(question);
+  question.type = question.type || '';
+  question.order = question.order || '100';
+  question.question = question.question || '';
+  question.default_value = question.default_value || '';
+  question.reference_qualifer = question.reference_qualifer || '';
+  question.table = question.table || '';
+  var modifiedQuestion = {
+    type: question.type,
+    order: question.order,
+    question_text: question.question,
+    name: question.question.toString().toLowerCase().replace(/[^a-z0-9+]+/gi, '_'),
+    default_value: question.default_value,
+    reference_qual: question.reference_qualifer,
+    reference: question.table,
+    use_reference_qualifier: 'advanced',
+    lookup_table: question.table,
+    lookup_value: 'sys_id',
+    lookup_label: (function(){
+      if(question.table!=""){
+        var qtableGR = new GlideRecord(question.table);
+        return qtableGR.getDisplayName();
+      } else {
+        return "";
+      }
+    })(),
+    list_table: question.table,
+    cat_item: sysid
+  };
+  gs.print(modifiedQuestion);
+  var post = ip.restCall({
+			"method": "post",
+			"endpoint": "api/now/table/item_option_new",
+			"body": modifiedQuestion
+  });
+  var questionSysid = JSON.parse(post.body).result.sys_id;
+			//create choices;
+			question.choices.split(',').forEach(function(choice, index){
+				var postChoice = ip.restCall({
+					"method": "post",
+					"endpoint": "api/now/table/question_choice",
+					"body": {
+						"text": choice.toString(),
+						"value": choice.toString().toLowerCase(),
+						"order": (parseInt(index,10)*100) + 100,
+						"question": questionSysid
+					}
+				});
+			});
+});
+*/]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-15 08:21:11</sys_created_on>
+        <sys_id>65c8811b1b3bb300f1bf2136ec4bcb23</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Working script to make item</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_script_fix_65c8811b1b3bb300f1bf2136ec4bcb23</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-16 05:12:36</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>
