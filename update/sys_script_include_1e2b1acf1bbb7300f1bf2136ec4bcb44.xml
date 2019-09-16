@@ -141,30 +141,32 @@ itemProcess.prototype = {
 					})()
 				};
 				var ip = new x_8821_dev_toolbox.itemProcess();
-				var questionSysid = JSON.parse(post.body).result.sys_id;
-				if(question.type == "5" || question.type=="3"){
-					//select or radio
-					var choices = question.choices.toString().split(',') || '';
-					//this.createChoices(questionSysid, choices);
 
-					choices.forEach(function(choice, index){
-						var postChoice = ip.restCall({
-							"method": "post",
-							"endpoint": "api/now/table/question_choice",
-							"body": {
-								"text": choice.toString(),
-								"value": choice.toString().toLowerCase(),
-								"order": (parseInt(index,10)*100) + 100,
-								"question": questionSysid
-							}
+				var post = ip.restCall({
+					"method": "post",
+					"endpoint": "api/now/table/item_option_new",
+					"body": modifiedQuestion
+				},function(response){
+					var questionSysid = JSON.parse(response.body).result.sys_id;
+					if(question.type == "5" || question.type=="3"){
+						//select or radio
+						var choices = question.choices.toString().split(',') || '';
+						//this.createChoices(questionSysid, choices);
+
+						choices.forEach(function(choice, index){
+							var postChoice = ip.restCall({
+								"method": "post",
+								"endpoint": "api/now/table/question_choice",
+								"body": {
+									"text": choice.toString(),
+									"value": choice.toString().toLowerCase(),
+									"order": (parseInt(index,10)*100) + 100,
+									"question": questionSysid
+								}
+							});
 						});
-					});
-				}
-			});
-			var post = ip.restCall({
-				"method": "post",
-				"endpoint": "api/now/table/item_option_new",
-				"body": modifiedQuestion
+					}
+				});
 			});
 			var script = "";
 			script += "function onLoad() {\n";
@@ -226,13 +228,13 @@ itemProcess.prototype = {
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-14 20:34:26</sys_created_on>
         <sys_id>1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_id>
-        <sys_mod_count>73</sys_mod_count>
+        <sys_mod_count>75</sys_mod_count>
         <sys_name>itemProcess</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_script_include_1e2b1acf1bbb7300f1bf2136ec4bcb44</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-16 06:31:39</sys_updated_on>
+        <sys_updated_on>2019-09-16 06:49:25</sys_updated_on>
     </sys_script_include>
 </record_update>
