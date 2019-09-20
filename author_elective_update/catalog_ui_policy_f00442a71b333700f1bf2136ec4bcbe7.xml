@@ -77,7 +77,7 @@
         <update_guid_history>bd14ca27113337003a0d5332d04965c0:-537300481</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="Make mandatory?">8aa446a71b333700f1bf2136ec4bcbff</sys_audit_delete>
+        <sys_audit_delete display_value="">8aa446a71b333700f1bf2136ec4bcbff</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-16 07:21:04</sys_created_on>

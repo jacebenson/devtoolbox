@@ -10,7 +10,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="NULL" display_value="" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e2b6bf7e1b7f3300f1bf2136ec4bcb4f</sys_ui_section>
+            <sys_ui_section display_value="">e2b6bf7e1b7f3300f1bf2136ec4bcb4f</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>
@@ -24,7 +24,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="Question" display_value="Question" name="sys_flow_cat_variable" sys_domain="global" view="Default view">2eb6bf7e1b7f3300f1bf2136ec4bcb29</sys_ui_section>
+            <sys_ui_section display_value="">2eb6bf7e1b7f3300f1bf2136ec4bcb29</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>
@@ -38,7 +38,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="Annotation" display_value="Annotation" name="sys_flow_cat_variable" sys_domain="global" view="Default view">26b6bf7e1b7f3300f1bf2136ec4bcb58</sys_ui_section>
+            <sys_ui_section display_value="">26b6bf7e1b7f3300f1bf2136ec4bcb58</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>
@@ -52,7 +52,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="Type Specifications" display_value="Type Specifications" name="sys_flow_cat_variable" sys_domain="global" view="Default view">eab6bf7e1b7f3300f1bf2136ec4bcb3a</sys_ui_section>
+            <sys_ui_section display_value="">eab6bf7e1b7f3300f1bf2136ec4bcb3a</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>
@@ -66,7 +66,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="Default Value" display_value="Default Value" name="sys_flow_cat_variable" sys_domain="global" view="Default view">22b6bf7e1b7f3300f1bf2136ec4bcb2f</sys_ui_section>
+            <sys_ui_section display_value="">22b6bf7e1b7f3300f1bf2136ec4bcb2f</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>
@@ -80,7 +80,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="Permission" display_value="Permission" name="sys_flow_cat_variable" sys_domain="global" view="Default view">aab6bf7e1b7f3300f1bf2136ec4bcb21</sys_ui_section>
+            <sys_ui_section display_value="">aab6bf7e1b7f3300f1bf2136ec4bcb21</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>
@@ -94,7 +94,7 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_overrides/>
             <sys_ui_form display_value="sys_flow_cat_variable" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e6b6f3b21b7f3300f1bf2136ec4bcb9b</sys_ui_form>
-            <sys_ui_section caption="Availability" display_value="Availability" name="sys_flow_cat_variable" sys_domain="global" view="Default view">e2b6bf7e1b7f3300f1bf2136ec4bcb34</sys_ui_section>
+            <sys_ui_section display_value="">e2b6bf7e1b7f3300f1bf2136ec4bcb34</sys_ui_section>
             <sys_updated_by>jacebenson</sys_updated_by>
             <sys_updated_on>2019-09-14 07:44:01</sys_updated_on>
         </sys_ui_form_section>

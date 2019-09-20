@@ -42,7 +42,7 @@
         <update_guid_history>7baa673e0f3f330093963c3bf7c3a768:-173647028</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="Process.Request a new catalog item">2949b3721bbf3300f1bf2136ec4bcb46</sys_audit_delete>
+        <sys_audit_delete display_value="">2949b3721bbf3300f1bf2136ec4bcb46</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-14 07:55:09</sys_created_on>
