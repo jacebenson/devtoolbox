@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="DELETE">
+        <active>true</active>
+        <before>false</before>
+        <description/>
+        <flush_cache>false</flush_cache>
+        <name>Working script to make item</name>
+        <record_for_rollback>false</record_for_rollback>
+        <run_once>true</run_once>
+        <script><![CDATA[try{
+	var current = new GlideRecord('sc_req_item');
+	current.get('627bd4271b3bf300f1bf2136ec4bcb9d');
+
+	//gs.print(current.variables.questions.toString());
+	var ip = new x_8821_dev_toolbox.itemProcess();
+	var vars = current.variables;
+	if(vars.flow == "" ){
+		vars.flow = "0-approval-1-task";
+	}
+	var workflows = {
+		"0-approval-1-task"          : "bbb388cf1bbf3300f1bf2136ec4bcbe3",
+		"0-approval-2-task-parallel" : "51750c431bff3300f1bf2136ec4bcb27",
+		"0-approval-2-task-serial"   : "79f444431bff3300f1bf2136ec4bcb16",
+		"1-approval-1-task"          : "79f788471bff3300f1bf2136ec4bcb7f",
+		"1-approval-2-task-parallel" : "c7c5c8831bff3300f1bf2136ec4bcb45",
+		"1-approval-2-task-serial"   : "d0a688c31bff3300f1bf2136ec4bcb63",
+		"2-approval-1-task"          : "91a8cc471bff3300f1bf2136ec4bcbf9",
+		"2-approval-2-task-parallel" : "9848cc471bff3300f1bf2136ec4bcbbe",
+		"2-approval-2-task-serial"   : "d5878c071bff3300f1bf2136ec4bcb4b"
+	};
+	//gs.print(vars.flow.toString());
+	ip.createItem(JSON.stringify({
+		"description": vars.html.toString() || '', 
+		"short_description": vars.name.toString() || '', 
+		"group": vars.owner.toString() || '', 
+		"meta": vars.meta.toString() || '', 
+		"name": vars.name.toString() || '',
+		"workflow": workflows[vars.flow.toString()]
+	}), current);
+
+} catch (error){
+	gs.error(JSON.stringify(error,'',' '));
+}
+/*
+var ip = new x_8821_dev_toolbox.itemProcess();
+var itemGR = new GlideRecord('sc_req_item');
+itemGR.get('6294385f1bb7b300f1bf2136ec4bcb21');
+itemGR.variables.questions;
+var sysid = 'f2947c1fdbb37b40f877aab35b9619b2';
+var questions = JSON.parse(itemGR.variables.questions);
+questions;
+questions.forEach(function(question){
+  gs.print(question);
+  question.type = question.type || '';
+  question.order = question.order || '100';
+  question.question = question.question || '';
+  question.default_value = question.default_value || '';
+  question.reference_qualifer = question.reference_qualifer || '';
+  question.table = question.table || '';
+  var modifiedQuestion = {
+    type: question.type,
+    order: question.order,
+    question_text: question.question,
+    name: question.question.toString().toLowerCase().replace(/[^a-z0-9+]+/gi, '_'),
+    default_value: question.default_value,
+    reference_qual: question.reference_qualifer,
+    reference: question.table,
+    use_reference_qualifier: 'advanced',
+    lookup_table: question.table,
+    lookup_value: 'sys_id',
+    lookup_label: (function(){
+      if(question.table!=""){
+        var qtableGR = new GlideRecord(question.table);
+        return qtableGR.getDisplayName();
+      } else {
+        return "";
+      }
+    })(),
+    list_table: question.table,
+    cat_item: sysid
+  };
+  gs.print(modifiedQuestion);
+  var post = ip.restCall({
+			"method": "post",
+			"endpoint": "api/now/table/item_option_new",
+			"body": modifiedQuestion
+  });
+  var questionSysid = JSON.parse(post.body).result.sys_id;
+			//create choices;
+			question.choices.split(',').forEach(function(choice, index){
+				var postChoice = ip.restCall({
+					"method": "post",
+					"endpoint": "api/now/table/question_choice",
+					"body": {
+						"text": choice.toString(),
+						"value": choice.toString().toLowerCase(),
+						"order": (parseInt(index,10)*100) + 100,
+						"question": questionSysid
+					}
+				});
+			});
+});
+*/]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-15 08:21:11</sys_created_on>
+        <sys_id>65c8811b1b3bb300f1bf2136ec4bcb23</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Working script to make item</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_script_fix_65c8811b1b3bb300f1bf2136ec4bcb23</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-16 05:12:36</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</application>
+        <file_path/>
+        <instance_id>dae8cb3fdbcc7f4091232f17d4961983</instance_id>
+        <instance_name>dev74974</instance_name>
+        <name>sys_script_fix_65c8811b1b3bb300f1bf2136ec4bcb23</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_fix"&gt;&lt;sys_script_fix action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;before&gt;false&lt;/before&gt;&lt;description/&gt;&lt;flush_cache&gt;false&lt;/flush_cache&gt;&lt;name&gt;Working script to make item&lt;/name&gt;&lt;record_for_rollback&gt;false&lt;/record_for_rollback&gt;&lt;run_once&gt;true&lt;/run_once&gt;&lt;script&gt;&lt;![CDATA[try{
+	var current = new GlideRecord('sc_req_item');
+	current.get('627bd4271b3bf300f1bf2136ec4bcb9d');
+
+	//gs.print(current.variables.questions.toString());
+	var ip = new x_8821_dev_toolbox.itemProcess();
+	var vars = current.variables;
+	if(vars.flow == "" ){
+		vars.flow = "0-approval-1-task";
+	}
+	var workflows = {
+		"0-approval-1-task"          : "bbb388cf1bbf3300f1bf2136ec4bcbe3",
+		"0-approval-2-task-parallel" : "51750c431bff3300f1bf2136ec4bcb27",
+		"0-approval-2-task-serial"   : "79f444431bff3300f1bf2136ec4bcb16",
+		"1-approval-1-task"          : "79f788471bff3300f1bf2136ec4bcb7f",
+		"1-approval-2-task-parallel" : "c7c5c8831bff3300f1bf2136ec4bcb45",
+		"1-approval-2-task-serial"   : "d0a688c31bff3300f1bf2136ec4bcb63",
+		"2-approval-1-task"          : "91a8cc471bff3300f1bf2136ec4bcbf9",
+		"2-approval-2-task-parallel" : "9848cc471bff3300f1bf2136ec4bcbbe",
+		"2-approval-2-task-serial"   : "d5878c071bff3300f1bf2136ec4bcb4b"
+	};
+	//gs.print(vars.flow.toString());
+	ip.createItem(JSON.stringify({
+		"description": vars.html.toString() || '', 
+		"short_description": vars.name.toString() || '', 
+		"group": vars.owner.toString() || '', 
+		"meta": vars.meta.toString() || '', 
+		"name": vars.name.toString() || '',
+		"workflow": workflows[vars.flow.toString()]
+	}), current);
+
+} catch (error){
+	gs.error(JSON.stringify(error,'',' '));
+}
+/*
+var ip = new x_8821_dev_toolbox.itemProcess();
+var itemGR = new GlideRecord('sc_req_item');
+itemGR.get('6294385f1bb7b300f1bf2136ec4bcb21');
+itemGR.variables.questions;
+var sysid = 'f2947c1fdbb37b40f877aab35b9619b2';
+var questions = JSON.parse(itemGR.variables.questions);
+questions;
+questions.forEach(function(question){
+  gs.print(question);
+  question.type = question.type || '';
+  question.order = question.order || '100';
+  question.question = question.question || '';
+  question.default_value = question.default_value || '';
+  question.reference_qualifer = question.reference_qualifer || '';
+  question.table = question.table || '';
+  var modifiedQuestion = {
+    type: question.type,
+    order: question.order,
+    question_text: question.question,
+    name: question.question.toString().toLowerCase().replace(/[^a-z0-9+]+/gi, '_'),
+    default_value: question.default_value,
+    reference_qual: question.reference_qualifer,
+    reference: question.table,
+    use_reference_qualifier: 'advanced',
+    lookup_table: question.table,
+    lookup_value: 'sys_id',
+    lookup_label: (function(){
+      if(question.table!=""){
+        var qtableGR = new GlideRecord(question.table);
+        return qtableGR.getDisplayName();
+      } else {
+        return "";
+      }
+    })(),
+    list_table: question.table,
+    cat_item: sysid
+  };
+  gs.print(modifiedQuestion);
+  var post = ip.restCall({
+			"method": "post",
+			"endpoint": "api/now/table/item_option_new",
+			"body": modifiedQuestion
+  });
+  var questionSysid = JSON.parse(post.body).result.sys_id;
+			//create choices;
+			question.choices.split(',').forEach(function(choice, index){
+				var postChoice = ip.restCall({
+					"method": "post",
+					"endpoint": "api/now/table/question_choice",
+					"body": {
+						"text": choice.toString(),
+						"value": choice.toString().toLowerCase(),
+						"order": (parseInt(index,10)*100) + 100,
+						"question": questionSysid
+					}
+				});
+			});
+});
+*/]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_fix&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jacebenson&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-09-15 08:21:11&lt;/sys_created_on&gt;&lt;sys_id&gt;65c8811b1b3bb300f1bf2136ec4bcb23&lt;/sys_id&gt;&lt;sys_mod_count&gt;17&lt;/sys_mod_count&gt;&lt;sys_name&gt;Working script to make item&lt;/sys_name&gt;&lt;sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox"&gt;57533b78db4623008096a455ca9619ba&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Developer Toolbox"&gt;57533b78db4623008096a455ca9619ba&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_fix_65c8811b1b3bb300f1bf2136ec4bcb23&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jacebenson&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-09-16 05:12:36&lt;/sys_updated_on&gt;&lt;unloadable&gt;false&lt;/unloadable&gt;&lt;/sys_script_fix&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1615002055</payload_hash>
+        <record_name>Working script to make item</record_name>
+        <reverted_from/>
+        <source>e6e34aea1b3b3300f1bf2136ec4bcbbe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-16 05:12:36</sys_created_on>
+        <sys_id>c0472def1b7ff300f1bf2136ec4bcb7c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16d387ca7940000001</sys_recorded_at>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-16 05:12:36</sys_updated_on>
+        <type>Fix Script</type>
+        <update_guid>0c472def817ff3001d4288582f6e307b</update_guid>
+        <update_guid_history>0c472def817ff3001d4288582f6e307b:1615002055,79076def967ff3008f3dfea30473fefa:504350457,e7d66dafdc7ff30005a59055b8039daa:1707835677,09d66dafca7ff300905e5d1a9b6b99a6:-1077303030,a896a5ef8e7ff3003059bad29c60d117:2062212561,6c76e5af367ff300537e114306a08d4d:1992201621,8206616f3e7ff300d664c8a4c4bc56e1:-8051376,c9c5ed6fb97ff3003d4151b632a20cdd:1510752198,8603a1abb57ff30075e7e649ab885c8c:1630543314,57e229ab177ff30076afd6ec9f72f7e7:1767925106,66c2652b007ff300b6b46e427ba47e4b:-173557710,cf72652bdd7ff30008ab33dd69f45a8e:234809906,eb01a9e77e7ff3004d0025fe0e68c5b8:-2104378649,cf8065e71d7ff3000353d65f244a08a8:-1589480587,c610a9a7627ff300d5cb8bcd807dae88:1734894311,61cc5523167ff3006b568c4f95ee8e46:862462868,388c19633d7ff3000223d1968fca6a23:-628392338,30d8c11b6c3bb300572595ea8ad81852:1225074467</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-20 07:40:10</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_fix">sys_script_fix</sys_db_object>
+        <sys_id>19f9b0ff57a640a898241815f38ce710</sys_id>
+        <sys_metadata>65c8811b1b3bb300f1bf2136ec4bcb23</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Working script to make item</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_scope_delete display_value="">186d300bf7ad4c60843652e8e89a2900</sys_scope_delete>
+        <sys_update_name>sys_script_fix_65c8811b1b3bb300f1bf2136ec4bcb23</sys_update_name>
+        <sys_update_version display_value="sys_script_fix_65c8811b1b3bb300f1bf2136ec4bcb23">c0472def1b7ff300f1bf2136ec4bcb7c</sys_update_version>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-20 07:40:10</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

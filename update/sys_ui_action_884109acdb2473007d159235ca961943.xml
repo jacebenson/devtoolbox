@@ -7,7 +7,7 @@
 
 }]]></client_script_v2>
         <comments/>
-        <condition>gs.hasRole('admin')</condition>
+        <condition>gs.hasRole('admin') &amp;&amp; gs.getProperty('x_8821_dev_toolbox.form_replace_text') === 'true'</condition>
         <form_action>true</form_action>
         <form_button>false</form_button>
         <form_button_v2>false</form_button_v2>
@@ -27,7 +27,7 @@
         <list_style/>
         <name>Replace Text</name>
         <onclick>openReplaceFx()</onclick>
-        <order>100000</order>
+        <order>101300</order>
         <script><![CDATA[function openReplaceFx(){
 	var sysid = g_form.getUniqueValue();
 	var dialogClass = GlideModal;
@@ -49,7 +49,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>884109acdb2473007d159235ca961943</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Replace Text</sys_name>
         <sys_overrides/>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
@@ -57,7 +57,7 @@
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_ui_action_884109acdb2473007d159235ca961943</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-03-29 05:22:42</sys_updated_on>
+        <sys_updated_on>2019-09-20 07:17:06</sys_updated_on>
         <table>task</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>true</ui16_compatible>

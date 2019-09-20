@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
     <sys_properties_category_m2m action="INSERT_OR_UPDATE">
         <category display_value="SN DevToolBox">c387968b1bbb7300f1bf2136ec4bcb15</category>
-        <order>200</order>
-        <property display_value="x_8821_dev_toolbox.InstanceBasicAuth" name="x_8821_dev_toolbox.InstanceBasicAuth">8a19d60f1bbb7300f1bf2136ec4bcb0b</property>
+        <order>1600</order>
+        <property display_value="x_8821_dev_toolbox.form_show_schema_map_old" name="x_8821_dev_toolbox.form_show_schema_map_old">538da2b01b800010f1bf2136ec4bcb12</property>
         <sys_class_name>sys_properties_category_m2m</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
-        <sys_created_on>2019-09-14 19:35:43</sys_created_on>
-        <sys_id>c8a91a0f1bbb7300f1bf2136ec4bcb18</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>x_8821_dev_toolbox.InstanceBasicAuth.SN DevToolBox</sys_name>
+        <sys_created_on>2019-09-20 07:40:43</sys_created_on>
+        <sys_id>ec8fe2f41b800010f1bf2136ec4bcb9c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_8821_dev_toolbox.form_show_schema_map_old.SN DevToolBox</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
-        <sys_update_name>sys_properties_category_m2m_c8a91a0f1bbb7300f1bf2136ec4bcb18</sys_update_name>
+        <sys_update_name>sys_properties_category_m2m_ec8fe2f41b800010f1bf2136ec4bcb9c</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-20 07:40:42</sys_updated_on>
+        <sys_updated_on>2019-09-20 07:40:43</sys_updated_on>
     </sys_properties_category_m2m>
 </record_update>

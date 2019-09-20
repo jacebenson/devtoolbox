@@ -5,7 +5,7 @@
 })();]]></action_script>
         <active>true</active>
         <comments/>
-        <condition>gs.hasRole("admin")</condition>
+        <condition>gs.hasRole("admin") &amp;&amp; gs.getProperty('x_8821_dev_toolbox.context.show_schema_old') === 'true'</condition>
         <do_not_cache>false</do_not_cache>
         <dynamic_actions_script><![CDATA[/** 
  * This server-side script is used to dynamically create actions for the context menu, such as the list of available templates 
@@ -21,7 +21,7 @@
  */ 
 ]]></dynamic_actions_script>
         <menu>list_header</menu>
-        <name>Show Schema Map (Old) (scoped)</name>
+        <name>Show Schema Map (Old)</name>
         <on_show_script><![CDATA[/**
  * This client-side script is used to dynamically change the context menu before it is displayed.
  * It is called before showing the context menu if the Run onShow script flag is checked.
@@ -36,7 +36,7 @@
  */
  
 ]]></on_show_script>
-        <order>100000</order>
+        <order>101600</order>
         <parent/>
         <run_on_show_script>false</run_on_show_script>
         <sys_class_name>sys_ui_context_menu</sys_class_name>
@@ -45,15 +45,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>eecc7b74db8623008096a455ca961975</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>Show Schema Map (Old) (scoped)</sys_name>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Show Schema Map (Old)</sys_name>
         <sys_overrides/>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_ui_context_menu_eecc7b74db8623008096a455ca961975</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2018-11-26 07:02:04</sys_updated_on>
+        <sys_updated_on>2019-09-20 06:53:30</sys_updated_on>
         <table>global</table>
         <track_selected>false</track_selected>
         <type>action</type>
