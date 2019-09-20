@@ -31,12 +31,12 @@
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-16 06:34:38</sys_created_on>
         <sys_id>e10a752b1bfff300f1bf2136ec4bcb9e</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-16 06:34:59</sys_updated_on>
+        <sys_updated_on>2019-09-16 07:35:25</sys_updated_on>
         <table>sc_req_item</table>
         <timezone/>
-        <validated>false</validated>
+        <validated>true</validated>
         <workflow display_value="SC 0 Approval 1 Task">bbb388cf1bbf3300f1bf2136ec4bcbe3</workflow>
     </wf_workflow_version>
     <wf_workflow action="INSERT_OR_UPDATE">

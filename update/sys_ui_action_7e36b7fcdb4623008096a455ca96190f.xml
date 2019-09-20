@@ -3,13 +3,13 @@
         <action_name>u_fpc_show_g_scratchpad</action_name>
         <active>true</active>
         <client>true</client>
-        <client_script_v2/>
-        <comments>Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne&#13;
-&#13;
-Allows a user with the "admin" role to display what data has been added to the g_scratchpad object.&#13;
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments>Allows a user with the "admin" role to display what data has been added to the g_scratchpad object.&#13;
 &#13;
 Requires the generic "u_fpc_simple_copy_paste" UI Page to display the results.</comments>
-        <condition>gs.hasRole("admin")</condition>
+        <condition>gs.hasRole("admin") &amp;&amp; gs.getProperty('x_8821_dev_toolbox.form_show_g_scratchpad') === 'true'</condition>
         <form_action>true</form_action>
         <form_button>false</form_button>
         <form_button_v2>false</form_button_v2>
@@ -27,9 +27,9 @@ Requires the generic "u_fpc_simple_copy_paste" UI Page to display the results.</
         <list_link>false</list_link>
         <list_save_with_form_button>false</list_save_with_form_button>
         <list_style/>
-        <name>Show Contents of g_scratchpad (scoped)</name>
+        <name>Show Contents of g_scratchpad</name>
         <onclick>u_fpcShowGScratchpad()</onclick>
-        <order>100000</order>
+        <order>101400</order>
         <script><![CDATA[function u_fpcShowGScratchpad(){
 	var newLine = "~~~newline~~~";  //will be replaced with line breaks in the UI Page
 	var scratchPad = "";
@@ -62,15 +62,15 @@ Requires the generic "u_fpc_simple_copy_paste" UI Page to display the results.</
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7e36b7fcdb4623008096a455ca96190f</sys_id>
-        <sys_mod_count>4</sys_mod_count>
-        <sys_name>Show Contents of g_scratchpad (scoped)</sys_name>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Show Contents of g_scratchpad</sys_name>
         <sys_overrides/>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_ui_action_7e36b7fcdb4623008096a455ca96190f</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2018-11-26 06:49:10</sys_updated_on>
+        <sys_updated_on>2019-09-20 07:38:12</sys_updated_on>
         <table>task</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

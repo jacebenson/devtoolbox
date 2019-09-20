@@ -24,7 +24,7 @@
 ]]></action_script>
         <active>true</active>
         <comments/>
-        <condition>gs.hasRole('admin')</condition>
+        <condition>gs.hasRole('admin') &amp;&amp; gs.getProperty('x_8821_dev_toolbox.context.show_json') === 'true'</condition>
         <do_not_cache>false</do_not_cache>
         <dynamic_actions_script><![CDATA[/** 
  * This server-side script is used to dynamically create actions for the context menu, such as the list of available templates 
@@ -55,7 +55,7 @@
  */
  
 ]]></on_show_script>
-        <order>1000</order>
+        <order>1220</order>
         <parent/>
         <run_on_show_script>false</run_on_show_script>
         <sys_class_name>sys_ui_context_menu</sys_class_name>
@@ -64,7 +64,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>db5c30e8db2473007d159235ca96196e</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Show JSON</sys_name>
         <sys_overrides/>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
@@ -72,7 +72,7 @@
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_ui_context_menu_db5c30e8db2473007d159235ca96196e</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-03-29 05:00:06</sys_updated_on>
+        <sys_updated_on>2019-09-20 06:52:43</sys_updated_on>
         <table>global</table>
         <track_selected>false</track_selected>
         <type>action</type>
