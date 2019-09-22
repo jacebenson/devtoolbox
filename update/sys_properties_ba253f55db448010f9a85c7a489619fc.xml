@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description/>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_8821_dev_toolbox.email_config</name>
+        <read_roles/>
+        <suffix>email_config</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-22 02:05:00</sys_created_on>
+        <sys_id>ba253f55db448010f9a85c7a489619fc</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_8821_dev_toolbox.email_config</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_properties_ba253f55db448010f9a85c7a489619fc</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-22 02:53:52</sys_updated_on>
+        <type>string</type>
+        <value>{&#13;
+  "generic": {&#13;
+    "theme": "mail.generic.theme",&#13;
+    "body": "mail.generic.body"&#13;
+  },&#13;
+  "sc_task": {&#13;
+    "theme": "mail.generic.theme",&#13;
+    "body": "mail.generic.body"&#13;
+  },&#13;
+  "sysapproval_approver": {&#13;
+    "theme": "mail.generic.theme",&#13;
+    "body": "mail.sysapproval_approver.body"&#13;
+  }&#13;
+}</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=ba253f55db448010f9a85c7a489619fc"/>
+</record_update>

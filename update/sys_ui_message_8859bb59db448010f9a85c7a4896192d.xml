@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application/>
+        <key>mail.generic.theme</key>
+        <language>en</language>
+        <message>&lt;head&gt;&#13;
+  &lt;title&gt; &lt;/title&gt;&#13;
+  &lt;!--[if !mso]&gt;&lt;!-- --&gt;&#13;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;&#13;
+  &lt;!--&lt;![endif]--&gt;&#13;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;&#13;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;&#13;
+  &lt;style type="text/css"&gt;&#13;
+    #outlook a {&#13;
+      padding: 0;&#13;
+    }&#13;
+&#13;
+    .ReadMsgBody {&#13;
+      width: 100%;&#13;
+    }&#13;
+&#13;
+    .ExternalClass {&#13;
+      width: 100%;&#13;
+    }&#13;
+&#13;
+    .ExternalClass * {&#13;
+      line-height: 100%;&#13;
+    }&#13;
+&#13;
+    body {&#13;
+      margin: 0;&#13;
+      padding: 0;&#13;
+      -webkit-text-size-adjust: 100%;&#13;
+      -ms-text-size-adjust: 100%;&#13;
+    }&#13;
+&#13;
+    table,&#13;
+    td {&#13;
+      border-collapse: collapse;&#13;
+      mso-table-lspace: 0pt;&#13;
+      mso-table-rspace: 0pt;&#13;
+    }&#13;
+&#13;
+    img {&#13;
+      border: 0;&#13;
+      height: auto;&#13;
+      line-height: 100%;&#13;
+      outline: none;&#13;
+      text-decoration: none;&#13;
+      -ms-interpolation-mode: bicubic;&#13;
+    }&#13;
+&#13;
+    p {&#13;
+      display: block;&#13;
+      margin: 13px 0;&#13;
+    }&#13;
+  &lt;/style&gt;&#13;
+  &lt;!--[if !mso]&gt;&lt;!--&gt;&#13;
+  &lt;style type="text/css"&gt;&#13;
+    @media only screen and (max-width:480px) {&#13;
+      @-ms-viewport {&#13;
+        width: 320px;&#13;
+      }&#13;
+      @viewport {&#13;
+        width: 320px;&#13;
+      }&#13;
+    }&#13;
+  &lt;/style&gt;&#13;
+  &lt;!--&lt;![endif]--&gt;&#13;
+  &lt;!--[if mso]&gt;&#13;
+        &lt;xml&gt;&#13;
+        &lt;o:OfficeDocumentSettings&gt;&#13;
+          &lt;o:AllowPNG/&gt;&#13;
+          &lt;o:PixelsPerInch&gt;96&lt;/o:PixelsPerInch&gt;&#13;
+        &lt;/o:OfficeDocumentSettings&gt;&#13;
+        &lt;/xml&gt;&#13;
+        &lt;![endif]--&gt;&#13;
+  &lt;!--[if lte mso 11]&gt;&#13;
+        &lt;style type="text/css"&gt;&#13;
+          .outlook-group-fix { width:100% !important; }&#13;
+        &lt;/style&gt;&#13;
+        &lt;![endif]--&gt;&#13;
+  &lt;!--[if !mso]&gt;&lt;!--&gt;&#13;
+  &lt;link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css"&gt;&#13;
+  &lt;style type="text/css"&gt;&#13;
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);&#13;
+  &lt;/style&gt;&#13;
+  &lt;!--&lt;![endif]--&gt;&#13;
+  &lt;style type="text/css"&gt;&#13;
+    @media only screen and (min-width:480px) {&#13;
+      .mj-column-per-100 {&#13;
+        width: 100% !important;&#13;
+        max-width: 100%;&#13;
+      }&#13;
+    }&#13;
+  &lt;/style&gt;&#13;
+  &lt;style type="text/css"&gt;&#13;
+    @media only screen and (max-width:480px) {&#13;
+      table.full-width-mobile {&#13;
+        width: 100% !important;&#13;
+      }&#13;
+      td.full-width-mobile {&#13;
+        width: auto !important;&#13;
+      }&#13;
+    }&#13;
+  &lt;/style&gt;&#13;
+&lt;/head&gt;</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-22 02:21:09</sys_created_on>
+        <sys_id>8859bb59db448010f9a85c7a4896192d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>mail.generic.theme</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_message_8859bb59db448010f9a85c7a4896192d</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-22 02:21:09</sys_updated_on>
+    </sys_ui_message>
+</record_update>
