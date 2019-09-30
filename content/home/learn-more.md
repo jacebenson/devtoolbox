@@ -72,19 +72,24 @@ This is contained within the `variableHelper` Script include and here's a sample
 
 ```js
 // Run this
-var vh = new x_8821_glide_utils.variableHelper();
+var vh = new x_8821_dev_toolbox.variableHelper();
 
 var current = new GlideRecord('change_request');
 current.get('c286d61347c12200e0ef563dbb9a71df');
 var vars = vh.getVariables(current);
-var printable = JSON.stringify(vars);
+var printable = JSON.stringify(vars, '', ' ');
 gs.info(printable);
 
 var current = new GlideRecord('sc_req_item');
-current.get('257c82740f4b1300fc69cdbce1050ea2');
-var vars = vh.getVariables(current);
-var printable = JSON.stringify(vars);
-gs.info(printable);
+//current.get('257c82740f4b1300fc69cdbce1050ea2');
+current.setLimit(1);
+current.orderByDesc('sys_created_on');
+current.query();
+if (current.next()) {
+    var vars = vh.getVariables(current);
+    var printable = JSON.stringify(vars, '', ' ');
+    gs.info(printable);
+}
 ```
 
 ```sh
