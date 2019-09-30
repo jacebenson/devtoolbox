@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>osaf_v2</name>
+        <scoped_name>x_8821_dev_toolbox_osaf_v2</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-30 04:28:41</sys_created_on>
+        <sys_id>2323a984db144010f9a85c7a48961906</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>osaf_v2</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_macro_2323a984db144010f9a85c7a48961906</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-30 04:46:01</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="true" xmlns:g="glide" xmlns:g2="null" xmlns:j="jelly:core" xmlns:j2="null">
+	<j:if test="${sysparm_base_form != 'sys_search_template'}">
+		<j2:set var="jvar_stream_id" value="$[x_8821_dev_toolbox.ActivityFormatter.generateRand()]"></j2:set>
+		<tr>
+			<td class="sn-form-stream-init" sn-stream-container="" stream-id="$[jvar_stream_id]">
+				<!--
+					reduces form jank with journal fields, hide them immediately
+				-->
+				<j2:if test="$[empty(jvar_activity_stream_rendered)]">
+					<j2:set var="jvar_activity_stream_rendered" value="true" />
+					<j2:set var="jvar_activity_stream_show_more_less_enabled" value="false" />
+					<g:evaluate var="jvar_use_inline_stream">
+						SNC.NGListHistoryRenderUtil.useInlineStream();
+					</g:evaluate>
+    <script>
+        (function() {
+            var $ = jQuery.noConflict();
+			var streamId = "$[jvar_stream_id]";
+			var selector = '[sn-stream-container]';
+			if (streamId) {
+				selector +=  '[stream-id="' + streamId + '"]';
+			}
+
+            $(function() {
+                $(selector).on('click', 'ul .stream-action', function(e) {
+                    e.stopPropagation();
+                    var t = $(e.currentTarget);
+                    switch (t.attr('action-type')) {
+                        case 'show-more':
+                            triggerShowMore(t);
+                            break;
+
+                        case 'show-less':
+                            getEntryTextBlock(t).removeClass('state-expanded');
+                            t.attr('action-type', 'show-more');
+                            swapMoreActionLabel(t);
+                            break;
+
+                        case 'show-all':
+                            var sysId = t.attr('sys-id');
+                            $.get('/api/now/ui/stream_entry/full_entry?sysparm_sys_id=' + sysId).then(function(response) {
+                                if (!response) {
+                                    return;
+                                }
+                                if (response.result) {
+                                    var body = getFormattedBody(response.result);
+                                    getEntryTextBlockBody(t).html(body);
+                                    t.hide();
+                                    var $more = getMoreAction(t);
+                                    triggerShowMore($more);
+                                    $more.show();
+                                }
+                            });
+                            break;
+
+						case 'attachment-image-handler':
+							var state = t.attr('state');
+							var isSmallerImage = t.attr('is-small') === 'true';
+							if (state === 'not_available') {
+								e.preventDefault();
+								showAttachmentUnavailableMsg(t.attr('file-name'));
+							} else if (state === 'available' || !window.NOW.attachmentAdviceRequired) {
+								if (isSmallerImage) {
+									e.preventDefault();
+									showImageModal(t);
+								}
+							} else {
+								e.preventDefault();
+								getAttachmentAvailability(t,
+									function successCallback() {
+										if (isSmallerImage) {
+											t.children().toggle();
+										} else {
+											downloadAttachment(t);
+										}
+									}
+								);
+							}
+							break;
+
+						case 'attachment-video-handler':
+							e.preventDefault();
+							var state = t.attr('state');
+							if (state === 'available' || !window.NOW.attachmentAdviceRequired) {
+								playVideo(t);
+							} else if (state === 'not_available') {
+								showAttachmentUnavailableMsg(t.attr('file-name'));
+							} else {
+								getAttachmentAvailability(t, playVideo);
+							}
+							break;
+
+						case 'attachment-default-handler':
+							var state = t.attr('state');
+							if (state === 'available' || !window.NOW.attachmentAdviceRequired) {
+								return;
+							} else if (state === 'not_available') {
+								e.preventDefault();
+								showAttachmentUnavailableMsg(t.attr('file-name'));
+							} else {
+								e.preventDefault();
+								getAttachmentAvailability(t, downloadAttachment);
+							}
+							break;
+
+						case 'show-attachment-unavailable':
+							showAttachmentUnavailableMsg(t.attr('file-name'))
+							break;
+
+                        case 'email-stream-response':
+                            e.preventDefault();
+                            openEmailStreamResponseWindow(t);
+                            break;
+
+                        case 'show-email':
+                            e.preventDefault();
+                            var $email = getEntryEmailBlock(t);
+                            addEntryEmailPreview(t);
+                            $email.show();
+                            t.attr('action-type', 'hide-email');
+                            swapMoreActionLabel(t);
+                            break;
+
+                        case 'hide-email':
+                            e.preventDefault();
+                            getEntryEmailBlock(t).hide();
+                            getEntryEmailTextBlock(t).html('');
+                            t.attr('action-type', 'show-email');
+                            swapMoreActionLabel(t);
+                            break;
+                    }
+                });
+
+				function setAttachmentState($el, state) {
+					$el.attr('state',state);
+					if (state === 'not_available') {
+						if ($el.attr('action-type') === 'attachment-image-handler') {
+							$el.find('p').append(' [${gs.getMessage('unavailable')}]')
+						} else {
+							$el.append(' [${gs.getMessage('unavailable')}]')
+						}
+						$el.parent().addClass('sn-card-attachment-unavailable');
+					}
+				}
+
+				function getAttachmentAvailability($el, sucessFn) {
+					var attachmentSysId = $el.attr('sys-id');
+					$.get('/api/now/as_attachment/getAvailability/' + attachmentSysId)
+						.then(function(response) {
+							if (response.result) {
+								setAttachmentState($el,response.result.availability);
+								if (response.result.availability === 'available') {
+									sucessFn($el);
+								} else {
+									showAttachmentUnavailableMsg($el.attr('file-name'), response.result.message);
+								}
+							} else {
+								<!-- if no valid response or if the getAvailability API is not available, fallback to server download,
+										(sys_attachment processor should take care of infected attachments) -->
+								downloadAttachment($el);
+							}
+						}, function() {
+							downloadAttachment($el);
+						});
+				}
+
+				function showAttachmentUnavailableMsg(fileName, customMsg) {
+					if (typeof g_form === "undefined")
+						return;
+
+					customMsg = customMsg || '${gs.getMessage("The file {0} did not pass security scan and cannot be downloaded")}'
+									.replace('{0}', fileName);
+					g_form.addErrorMessage(customMsg);
+				}
+
+				function downloadAttachment($el) {
+					var link = document.createElement('a');
+					link.href = $el.attr('href');
+					link.download = $el.attr('file-name');
+					var event = (typeof window.MouseEvent === "function")
+									? new MouseEvent("click")
+									: document.createEvent('Event');
+					event.initEvent('click', true, true);
+					link.dispatchEvent(event);
+				}
+
+				function playVideo($el) {
+					$el.siblings().show();
+					$el.hide();
+					$el.parent().find('video')[0].play();
+				}
+
+				function showImageModal($el) {
+					CustomEvent.fire('sn.attachment.preview', event, {
+						sys_id: $el.attr('sys-id'),
+						file_name: $el.attr('file-name'),
+						size: $el.attr('size')
+					});
+				}
+
+				function triggerShowMore($el) {
+					getEntryTextBlock($el).addClass('state-expanded');
+					$el.attr('action-type', 'show-less');
+					swapMoreActionLabel($el);
+				}
+
+                function swapMoreActionLabel($el) {
+                    var newLabel = $el.attr('show-label');
+                    $el.attr('show-label', $el.text());
+                    $el.text(newLabel);
+                }
+
+                function getMoreAction($el) {
+                    return $el.parents('.sn-card-component_summary').find('.stream-action-show-more');
+                }
+
+                function getEntryEmailBlock($el) {
+                    return $el.parents('.sn-card-component_records').siblings('.sn-card-component_summary');
+                }
+
+                function getEntryEmailTextBlock($el) {
+                    return getEntryEmailBlock($el).find('.sn-widget-textblock');
+                }
+
+                function addEntryEmailPreview($el) {
+                    var $body = getEntryEmailTextBlock($el);
+                    var $frame = $(document.createElement('iframe'));
+                    $frame.addClass('card');
+                    $frame.css('width', '100%');
+                    $frame.attr('src', $el.attr('href'));
+                    $body.append($frame);
+                    $frame.on('load', function() {
+                        var bodyHeight = $frame.get(0).contentWindow.document.body.scrollHeight + 'px';
+                        $frame.height(bodyHeight);
+                    });
+                }
+
+                function openEmailStreamResponseWindow(t) {
+                    if (typeof window.nowapi === "undefined" ||
+                        typeof window.nowapi.GlideURLBuilder === "undefined" ||
+                        typeof window.nowapi.g_navigation === "undefined") {
+                        return;
+                    }
+                    var table = t.attr('table');
+                    var url = window.nowapi.GlideURLBuilder.newGlideUrl('email_client.do');
+                    url.addParam('sysparm_table', table);
+                    url.addParam('sysparm_target', table);
+                    url.addParam('sysparm_sys_id', t.attr('sys-id'));
+                    url.addParam('replytype', t.attr('reply-type'));
+                    url.addParam('replyid', t.attr('reply-id'));
+                    var popupURL = url.getURL();
+                    if (typeof g_form !== "undefined") {
+                        popupURL += g_form.serializeChangedAll();
+                    }
+                    var features = "width=875,height=575,toolbar=no,status=no,directories=no,menubar=no,resizable=yes,scrollbars=1";
+                    var win = window.nowapi.g_navigation.openPopup(popupURL, "Email_Client", features);
+                }
+
+                function getEntryTextBlock($el) {
+                    return $el.parents('.sn-card-component_summary').find('.sn-widget-textblock');
+                }
+
+                function getEntryTextBlockBody($el) {
+                    return $el.parents('.sn-card-component_summary').find('.sn-widget-textblock-body');
+                }
+
+                function getFormattedBody(s) {
+                    return s.replace(/\n/g, '<br/>');
+                }
+            });
+        })();
+    </script>
+
+					<j2:if test="$[empty(jvar_show_stream) &amp;&amp; empty(jvar_table) &amp;&amp; !empty(sysparm_table)]">
+						<g2:evaluate var="jvar_show_stream" expression="!__ref__.isNewRecord() &amp;&amp; __ref__.canRead() &amp;&amp; !RP.isSearch()"/>
+						<j2:set var="jvar_table" value="${sysparm_table}"/>
+					</j2:if>
+
+				<j2:if test="$[jvar_show_stream]">
+					<j:if test="${jvar_use_inline_stream == 'true'}">
+						<g2:evaluate var="jvar_stream_data" jelly="true" object="true">
+								new GlideNGStreamAPI().getFormStreamData(jelly.jvar_table, jelly.jvar_form_sys_id, jelly.jvar_current_visible_fields);
+						</g2:evaluate>
+						<g2:evaluate var="jvar_stream_data_time_format" jelly="true" object="true">
+							var prefs = gs.getPreference('glide.ui.date_format');
+							var answer = 'DATE';
+							try {
+								var prefsObj = new global.JSON().decode(prefs);
+								if (prefsObj.dateBoth) {
+									answer = 'BOTH';
+								} else if (prefsObj.timeAgo) {
+									answer = 'TIMEAGO';
+								}
+							} catch (e) {
+
+								// NOOP
+							}
+							answer;
+						</g2:evaluate>
+						<script>
+							(function() {
+
+								// set up pre-cached stream data to avoid an ajax call early in the page load
+								var key = '$[jvar_table]' + '_' + '$[jvar_form_sys_id]';
+								var fields = JSON.parse('$[JS:jvar_stream_data.fields_json()]');
+								window.NOW.snActivityStreamData = NOW.snActivityStreamData || {};
+								window.NOW.snActivityStreamData[key] = {
+										sys_timestamp: '$[JS:jvar_stream_data.sys_timestamp()]',
+										fields: fields,
+										entries: [],
+										inlineStreamLoaded: $[JS:jvar_stream_data.has_entries()]
+									};
+							})();
+						</script>
+					</j:if>
+
+					<g2:evaluate var="jvar_attachmentAdviceRequired" jelly="true">
+						sn_snap.AntiVirusOnDemandAdvisor.isAdviceRequired(jelly.jvar_table);
+					</g2:evaluate>
+					<script>
+						NOW.attachmentAdviceRequired = $[jvar_attachmentAdviceRequired];
+					</script>
+
+					<j:if test="${jvar_use_inline_stream == 'false'}">
+						<g2:evaluate var="jvar_activity_stream_data" jelly="true">
+							new GlideNGListHistoryUtil().getPreloadedFormStream(jelly.jvar_table, jelly.jvar_form_sys_id, true, false);
+						</g2:evaluate>
+						<script>
+							(function() {
+
+								// set up pre-cached stream data to avoid an ajax call early in the page load
+								var key = '$[jvar_table]' + '_' +  '$[jvar_form_sys_id]';
+								window.NOW.snActivityStreamData = NOW.snActivityStreamData || {};
+								window.NOW.snActivityStreamData[key] = "$[JS:jvar_activity_stream_data]";
+								if (window.NOW.snActivityStreamData[key]) {
+									window.NOW.snActivityStreamData[key] = JSON.parse(window.NOW.snActivityStreamData[key]);
+								}
+							})();
+						</script>
+					</j:if>
+					<script>
+						(function() {
+							// find the section containing this stream element and add a marker to it
+								// we process all the journal fields in a .sn-stream-section in GlideStreamJournalElement.js
+							var $section = $j('.sn-form-stream-init').closest('.section');
+							$section.addClass('sn-stream-section');
+						})();
+					</script>
+
+					<g2:requires position="last" name="scripts/elements/GlideStreamJournalElement.js" />
+
+					<div class="$[jvar_container_class]" scroll-from="#form_stream" ng-controller="formStream">
+						<div ng-controller="Stream" class="doctype-stream form-stream">
+							<g2:evaluate var="jvar_show_comments_box" expression="!RP.isInlinePopup()" jelly="true" />
+							<j:if test="${gs.getProperty('glide.ui.activity_stream.allow_preferred_field', 'true') == 'true'}">
+								<g2:evaluate var="jvar_preferred_input" jelly="true">
+									var preferredInput = gs.getUser().getPreference('glide.ui.${ref_parent}.stream_input');
+									if (jelly.jvar_stream_data $[AND] !jelly.jvar_stream_data.isAvailableField(preferredInput)) {
+									    var firstWritableJournal = jelly.jvar_stream_data.first_writable_journal();
+									     if( firstWritableJournal )
+											preferredInput = firstWritableJournal.name();
+									}
+
+									preferredInput;
+								</g2:evaluate>
+							</j:if>
+
+								<j:if test="${jvar_use_inline_stream == 'true'}">
+
+									<!--
+												New Shiny Jelly Inputs!
+									-->
+
+									<j2:if test="$[jvar_show_comments_box == 'true']">
+										<div ng-controller="snStream" is-inline="" table="${ref_parent}" query="$[JS:sysparm_query]"
+											  sys_id="$[${ref_parent}.getUniqueValue()]" active="true"
+											  template="x_8821_dev_toolbox_record_stream_entry.xml" sessions="sessions"
+											  form-journal-fields="formJournalFields"
+											  preferred-input="$[HTML:jvar_preferred_input]"
+											  use-multiple-inputs="$[HTML,JS:gs.getUser().getPreference('glide.ui.activity_stream.multiple_inputs')]"
+											  expand-entries="true"
+											  page-size="${gs.getProperty('glide.ui.activity_stream.page_size', 0)}"
+											  truncate="false" attachments="true" sessionsLength="sessionsLength">
+											<g:inline template="activity_template_stream_inline_inputs.xml"/>
+										</div>
+									</j2:if>
+									<j2:if test="$[jvar_show_comments_box == 'false']">
+										<div ng-controller="snStream" is-inline="" table="${ref_parent}" query="$[JS:sysparm_query]"
+											  sys_id="$[${ref_parent}.getUniqueValue()]" active="true" show-comments-and-work-notes="false"
+											  template="x_8821_dev_toolbox_record_stream_entry.xml" sessions="sessions"
+											  expand-entries="true"
+											  truncate="false" attachments="true" sessionsLength="sessionsLength">
+											<g:inline template="activity_template_stream_inline_inputs.xml"/>
+										</div>
+									</j2:if>
+
+								</j:if>
+								<j:if test="${jvar_use_inline_stream == 'false'}">
+
+							<j2:if test="$[jvar_show_comments_box == 'true']">
+								<sn-stream table="'${ref_parent}'"
+									   query="'$[JS:sysparm_query]'"
+									   sys_id="'$[${ref_parent}.getUniqueValue()]'" active="true"
+									   template="x_8821_dev_toolbox_record_stream_entry.xml" sessions="sessions"
+											   form-journal-fields-visible="formJournalFieldsVisible"
+									   form-journal-fields="formJournalFields"
+									   preferred-input="'$[HTML:jvar_preferred_input]'"
+									   labels="{'labelClass': '${jvar_cols_label}', 'contentClass': '${jvar_cols_field}', 'offsetClass': '${jvar_cols_offset}', 'addonsClass': '${jvar_cols_addons}'}"
+									   use-multiple-inputs="$[HTML,JS:gs.getUser().getPreference('glide.ui.activity_stream.multiple_inputs')]"
+									   expand-entries="true"
+									   page-size="${gs.getProperty('glide.ui.activity_stream.page_size', 0)}"
+									   truncate="false" attachments="true" sessionsLength="sessionsLength" />
+							</j2:if>
+
+							<!-- Prevents comments field from displaying on Read only forms -->
+							<j2:if test="$[jvar_show_comments_box == 'false']">
+								<sn-stream table="'${ref_parent}'"
+										   query="'$[JS:sysparm_query]'"
+										   sys_id="'$[${ref_parent}.getUniqueValue()]'" active="true" show-comments-and-work-notes="false"
+										   template="x_8821_dev_toolbox_record_stream_entry.xml" sessions="sessions"
+										   expand-entries="true"
+										   truncate="false" attachments="true" sessionsLength="sessionsLength" />
+							</j2:if>
+								</j:if>
+						</div>
+					</div>
+
+					<j:if test="${jvar_use_inline_stream == 'true'}">
+						<div class="$[jvar_container_class] sn-stream sn-form-stream-inline">
+							<div id="sn_form_inline_stream_container" class="sn-form-inline-stream-container form-stream ng-non-bindable">
+							<label class="control-label ${jvar_cols_label}"></label>
+								<div id="sn_form_inline_stream_entries" class="sn-form-inline-stream-entries sn-form-inline-stream-entries-only ${jvar_cols_field}">
+
+								<!-- Begin jelly entries -->
+								<ul class="h-card-wrapper activities-form">
+										<j2:forEach items="$[jvar_stream_data.entries()]" var="jvar_entry">
+										<li class="h-card h-card_md h-card_comments">
+											<div class="sn-card-component sn-card-component_first sn-card-component_meta sn-card-component_meta_sibling">
+													<j2:if test="$[jvar_entry.show_avatar()]">
+													<div class="sn-card-component-avatar sn-avatar_xs sn-avatar_v2">
+														<div class="sn-avatar-container">
+																<span class="sn-avatar-initials">$[jvar_entry.initials()]</span>
+																<j2:if test="$[jvar_entry.user_image() != '']">
+																	<span class="sn-avatar-image" style="background-image: url($[jvar_entry.user_image()])" />
+															</j2:if>
+																<j2:if test="$[jvar_entry.presence_user_id() != '']">
+																	<span class="sn-presence sn-presence-lite" data-presence-id="$[jvar_entry.presence_user_id()]"></span>
+															</j2:if>
+														</div>
+													</div>
+												</j2:if>
+													<span class="sn-card-component-createdby">$[jvar_entry.sys_created_by()]</span>
+											</div>
+
+											<div class="sn-card-component sn-card-component_first sn-card-component_meta">
+												<span class="sn-card-component-time">
+													<j2:switch on="$[jvar_entry.type()]">
+														<j2:case value="JOURNAL">
+														<span>$[HTML:jvar_entry.journal().field_label()]</span>
+														</j2:case>
+														<j2:case value="EMAIL">
+															<span>${gs.getMessage("Email")} $[HTML:jvar_entry.email().fields().type()]</span>
+														</j2:case>
+														<j2:case value="IMAGE">
+															<span>${gs.getMessage('Image uploaded')}</span>
+														</j2:case>
+														<j2:case value="ATTACHMENT">
+															<span>${gs.getMessage('Attachment uploaded')}</span>
+														</j2:case>
+														<j2:default>
+															<span>${gs.getMessage('Field changes')}</span>
+														</j2:default>
+													</j2:switch>
+													<span class="sn-card-component_accent-bar_bullet">•</span>
+														<div class="date-calendar">$[HTML:jvar_entry.sys_created_on_adjusted()]</div>
+
+														<g2:evaluate var="jvar_timeago" jelly="true" object="true">
+															new GlideTimeAgo().formatClient(new GlideDateTime(jelly.jvar_entry.sys_created_on()));
+														</g2:evaluate>
+														<div class="datex date-timeago" title="$[HTML:jvar_timeago]" timeago="$[HTML:jvar_entry.sys_created_on()]">$[HTML:jvar_timeago]</div>
+												</span>
+											</div>
+
+											<!-- Attachment -->
+											<j2:if test="$[jvar_entry.type() == 'IMAGE' || jvar_entry.type() == 'VIDEO' || jvar_entry.type() == 'ATTACHMENT']">
+												<j2:choose>
+													<!-- Infected Attachment-->
+													<j2:when test="$[jvar_entry.attachment().state() == 'not_available']">
+														<div class="sn-card-component sn-card-component_attachment sn-card-attachment-unavailable">
+																<a action-type="show-attachment-unavailable" class="file-unavailable stream-action" href="javascript:;"
+															   file-name="$[HTML:jvar_entry.attachment().file_name()]" >
+																$[HTML:jvar_entry.attachment().file_name()]${AMP}#160;[${gs.getMessage('unavailable')}]
+															</a>
+														</div>
+													</j2:when>
+
+													<!-- IMAGE -->
+													<j2:when test="$[jvar_entry.type() == 'IMAGE']">
+														<g2:evaluate var="jvar_is_image_lt_max_size" jelly="true">
+															$[jvar_entry.attachment().size_bytes()] ${AMP}lt;= gs.getProperty('com.glide.attachment.max_get_size', 5242880)
+														</g2:evaluate>
+														<div class="sn-card-component sn-card-component_attachment state-selectable">
+															<a action-type="attachment-image-handler" href="$[HTML:jvar_entry.attachment().view_path()]" is-small="$[jvar_is_image_lt_max_size]"
+															   class="clearfix stream-action" sys-id="$[HTML:jvar_entry.attachment().sys_id()]" state="$[jvar_entry.attachment().state()]"
+															   size="$[HTML:jvar_entry.attachment().attachment_size()]" file-name="$[HTML:jvar_entry.attachment().file_name()]" >
+																<g2:set_if var="jvar_inline_image_css" test="$[jvar_attachmentAdviceRequired == 'false' || jvar_entry.attachment().state() == 'available']" true="inline-block" false="none"/>
+																<j2:if test="$[jvar_entry.attachment.thumbnail_path() != '' ${AND} jvar_is_image_lt_max_size == 'true']">
+																	<img class="sn-card-component-image" src="$[HTML:jvar_entry.attachment().image_path()]" style="display: $[jvar_inline_image_css]"/>
+																</j2:if>
+																<j2:if test="$[jvar_inline_image_css == 'none' || jvar_is_image_lt_max_size != 'true']">
+																	<p>$[HTML:jvar_entry.attachment().file_name()]</p>
+																</j2:if>
+															</a>
+														</div>
+													</j2:when>
+
+													<!-- VIDEO -->
+													<j2:when test="$[jvar_entry.type() == 'VIDEO']">
+														<div class="sn-card-component sn-card-component_headline sn-card-component_headline_sm sn-card-component_attachment sn-card-attachment-$[jvar_entry.attachment().extension()]"
+															 attachment-id="$[jvar_entry.attachment().sys_id()]" >
+															<a class="stream-action" action-type="attachment-video-handler" href="javascript:;" sys-id="$[jvar_entry.attachment().sys_id()]"
+															   state="$[jvar_entry.attachment().state()]" file-name="$[HTML:jvar_entry.attachment().file_name()]">
+																$[HTML:jvar_entry.attachment().file_name()]
+															</a>
+															<video height="264" controls="controls" preload="none" class="sn-video" style="display:none">
+																<source src="$[HTML:jvar_entry.attachment().download_path()]" type="$[HTML:jvar_entry.attachment().content_type()]"/>
+															</video>
+															<a download="$[jvar_entry.attachment().file_name()]" href="$[HTML:jvar_entry.attachment().download_path()]" style="display:none">
+																$[HTML:jvar_entry.attachment().file_name()]
+															</a>
+														</div>
+														<div class="sn-card-component sn-card-component_summary">$[HTML:jvar_entry.attachment().attachment_size()]</div>
+													</j2:when>
+
+													<!-- OTHER ATTACHMENT TYPES -->
+													<j2:when test="$[jvar_entry.type() == 'ATTACHMENT']">
+														<div class="sn-card-component sn-card-component_headline sn-card-component_headline_sm sn-card-component_attachment sn-card-attachment-$[HTML:jvar_entry.attachment().extension()]">
+															<a download="$[HTML:jvar_entry.attachment().file_name()]" href="$[HTML:jvar_entry.attachment().download_path()]" class="stream-action"
+															   action-type="attachment-default-handler" sys-id="$[jvar_entry.attachment().sys_id()]" state="$[jvar_entry.attachment().state()]"
+															   file-name="$[HTML:jvar_entry.attachment().file_name()]">
+																$[HTML:jvar_entry.attachment().file_name()]
+															</a>
+														</div>
+														<div class="sn-card-component sn-card-component_summary">$[HTML:jvar_entry.attachment().attachment_size()]</div>
+													</j2:when>
+												</j2:choose>
+											</j2:if>
+
+											<!-- Audit -->
+												<j2:if test="$[jvar_entry.type() == 'AUDIT']">
+													<g:evaluate var="jvar_audit_message_parts" object="true">
+														var auditMessage = gs.getMessage('{0} was {1}');
+														var tMessagePattern = /^([^{]*)\{([01])\}([^{]*)\{([01])\}(.*)$/;
+														var messageParts = tMessagePattern.exec(auditMessage);
+														var auditMessageParts = messageParts ?
+																{
+																	prefix: messageParts[1].trim(),
+														            newValPosition: messageParts[2],
+																	middle: messageParts[3].trim(),
+														            oldValPosition: messageParts[4],
+																	postfix: messageParts[5].trim()
+																} :
+														          {
+																	prefix: '',
+																	newValPosition: "0",
+																	middle: gs.getMessage('was'),
+																	oldValPosition: "1",
+																	postfix: ''
+														        };
+														auditMessageParts;
+													</g:evaluate>
+												<div class="sn-card-component sn-card-component_records">
+													<div class="sn-widget">
+														<ul class="sn-widget-list sn-widget-list-table">
+																<j2:forEach items="$[jvar_entry.audit()]" var="jvar_audit">
+																<li>
+																	<span class="sn-widget-list-table-cell">$[HTML:jvar_audit.field_label()]</span>
+																	<span class="sn-widget-list-table-cell">
+																		<g2:evaluate var="jvar_is_html" expression="$[jvar_audit.getType() == 'html' || jvar_audit.getType() == 'translated_html']"/>
+
+																		<g2:evaluate var="jvar_translated_new_value" jelly="true">
+																			var translatedValue = jelly.jvar_audit.new_value() || "[Empty]";
+
+																			if(jelly.jvar_is_html === 'true' $[AND] gs.getProperty('glide.ui.escape_text') === 'true')
+																				translatedValue = GlideStringUtil.getHTMLValue(translatedValue);
+																			else if(jelly.jvar_is_html === 'true')
+																				translatedValue = GlideStringUtil.getHTMLValue(translatedValue).replaceAll("\\n", "\\\\n").replaceAll("'", "\\\\'").replaceAll("\\r", "");
+
+																			translatedValue;
+																		</g2:evaluate>
+																		<g2:evaluate var="jvar_translated_old_value" jelly="true">
+																			var translatedValue = jelly.jvar_audit.old_value();
+
+																			if(jelly.jvar_is_html === 'true' $[AND] gs.getProperty('glide.ui.escape_text') === 'true')
+																				translatedValue = GlideStringUtil.getHTMLValue(translatedValue);
+																			else if(jelly.jvar_is_html === 'true')
+																				translatedValue = GlideStringUtil.getHTMLValue(translatedValue).replaceAll("\\n", "\\\\n").replaceAll("'", "\\\\'").replaceAll("\\r", "");
+
+																			translatedValue;
+																		</g2:evaluate>
+
+																		<j2:if test="$[jvar_is_html]">
+																			<script>
+																				function encapsulate(id, content, type) {
+																					var root = document.getElementById(id + '-iframe-' + type);
+																					if (document.head.createShadowRoot ||
+																						document.head.attachShadow) {
+																						var shadow = document.head.attachShadow ?
+																							root.attachShadow({ mode: 'open' }) :
+																							root.createShadowRoot();
+																						var contentDiv = document.createElement('div');
+																						shadow.appendChild(contentDiv);
+																						contentDiv.innerHTML = content;
+																					} else {
+																						var iframe = document.createElement("iframe");
+																						iframe.setAttribute("style", "border:none;display:block");
+																						iframe.setAttribute("class", "html-content");
+																						iframe.setAttribute("scrolling", "no");
+																						root.appendChild(iframe);
+																						var doc = iframe.contentWindow.document;
+																						doc.open();
+																						doc.write(content);
+																						doc.close();
+																						iframe.height = doc.body.scrollHeight + 'px';
+																					}
+																				}
+																			</script>
+																			<j:if test="${jvar_audit_message_parts.prefix != ''}">
+																				<j2:if test="$[jvar_audit.old_value() != '']">
+																					<span class="sn-widget-list-table-italic">${jvar_audit_message_parts.prefix}</span>
+																				</j2:if>
+																			</j:if>
+																			<span id="$[jvar_audit.getAuditSysId()]-iframe-new"></span>
+
+																			<j2:if test="$[jvar_audit.old_value() != '']">
+																				<j:if test="${jvar_audit_message_parts.newValPosition == '0'}">
+																					<script>
+																						encapsulate('$[jvar_audit.getAuditSysId()]', '$[NLBR,HTMLSAN:jvar_translated_new_value]', 'new');
+																					</script>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.newValPosition == '1' }">
+																					<script>
+																						encapsulate('$[jvar_audit.getAuditSysId()]', '$[NLBR,HTMLSAN:jvar_translated_old_value]', 'new');
+																					</script>
+																				</j:if>
+																			</j2:if>
+																			<j2:if test="$[jvar_audit.old_value() == '']">
+																				<script>
+																					encapsulate('$[jvar_audit.getAuditSysId()]', '$[NLBR,HTMLSAN:jvar_translated_new_value]', 'new');
+																				</script>
+																			</j2:if>
+
+																			<j2:if test="$[jvar_audit.old_value() != '']">
+																				<j:if test="${jvar_audit_message_parts.middle != ''}">
+																					<span class="sn-widget-list-table-italic">${jvar_audit_message_parts.middle}</span>
+																				</j:if>
+																				<span id="$[jvar_audit.getAuditSysId()]-iframe-old"></span>
+																				<j:if test="${jvar_audit_message_parts.oldValPosition == '0'}">
+																					<script>
+																					encapsulate('$[jvar_audit.getAuditSysId()]', '$[NLBR,HTMLSAN:jvar_translated_new_value]', 'old');
+																					</script>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.oldValPosition == '1' }">
+																					<script>
+																					encapsulate('$[jvar_audit.getAuditSysId()]', '$[NLBR,HTMLSAN:jvar_translated_old_value]', 'old');
+																				   </script>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.postfix != ''}">
+																					<span class="sn-widget-list-table-italic">${jvar_audit_message_parts.postfix}</span>
+																				</j:if>
+																			</j2:if>
+
+																		</j2:if>
+																		<j2:if test="$[!jvar_is_html]">
+																			<j:if test="${jvar_audit_message_parts.prefix != ''}">
+																				<j2:if test="$[jvar_audit.old_value() != '']">
+																					<span class="sn-widget-list-table-italic">${jvar_audit_message_parts.prefix}</span>
+																				</j2:if>
+																			</j:if>
+																			<j2:if test="$[jvar_audit.old_value() != '']">
+																				<j:if test="${jvar_audit_message_parts.newValPosition == '0'}">
+																					<span>$[NLBR,HTML,HTMLSAN:jvar_translated_new_value]</span>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.newValPosition == '1' }">
+																					<span>$[NLBR,HTML,HTMLSAN:jvar_translated_old_value]</span>
+																				</j:if>
+																			</j2:if>
+																			<j2:if test="$[jvar_audit.old_value() == '']">
+																					<span>$[NLBR,HTML,HTMLSAN:jvar_translated_new_value]</span>
+																			</j2:if>
+																			<j2:if test="$[jvar_audit.old_value() != '']">
+																				<j:if test="${jvar_audit_message_parts.middle != ''}">
+																					<span class="sn-widget-list-table-italic">${jvar_audit_message_parts.middle}</span>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.oldValPosition == '0'}">
+																					<span>$[NLBR,HTML,HTMLSAN:jvar_translated_new_value]</span>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.oldValPosition == '1' }">
+																					<span>$[NLBR,HTML,HTMLSAN:jvar_translated_old_value]</span>
+																				</j:if>
+																				<j:if test="${jvar_audit_message_parts.postfix != ''}">
+																					<span class="sn-widget-list-table-italic">${jvar_audit_message_parts.postfix}</span>
+																				</j:if>
+																			</j2:if>
+
+																		</j2:if>
+																	</span>
+																</li>
+															</j2:forEach>
+														</ul>
+													</div>
+												</div>
+											</j2:if>
+
+											<j2:if test="$[jvar_entry.type() == 'EMAIL']">
+												<div class="sn-card-component sn-card-component_records">
+													<div class="sn-widget">
+														<ul class="sn-widget-list sn-widget-list-table">
+															<li>
+																<span class="sn-widget-list-table-cell">
+																	<span class="icon-mail"/>
+																</span>
+																<span class="sn-widget-list-table-cell">
+																		${gs.getMessage("Email")} $[HTML:jvar_entry.email().fields().type()]
+																</span>
+															</li>
+															<li>
+																<span class="sn-widget-list-table-cell">${gs.getMessage("Subject")}:</span>
+																	<span class="sn-widget-list-table-cell">$[HTML:jvar_entry.email().fields().subject()]</span>
+															</li>
+															<li>
+																<span class="sn-widget-list-table-cell">${gs.getMessage("From")}:</span>
+																	<span class="sn-widget-list-table-cell">$[HTML:jvar_entry.email().fields().user()]</span>
+															</li>
+															<li>
+																<span class="sn-widget-list-table-cell">${gs.getMessage("To")}:</span>
+																	<span class="sn-widget-list-table-cell">$[HTML:jvar_entry.email().fields().reducedTo().replaceAll(",", ", ")]</span>
+															</li>
+																<j2:if test="$[jvar_entry.email().fields().copied() != '']">
+																<li>
+																	<span class="sn-widget-list-table-cell">
+																		${gs.getMessage("CC")}:
+																	</span>
+																	<span class="sn-widget-list-table-cell">
+																			$[HTML:jvar_entry.email().fields().copied().replaceAll(",", ", ")]
+																	</span>
+																</li>
+															</j2:if>
+															<li>
+																<span class="sn-widget-list-table-cell"></span>
+																<span class="sn-widget-list-table-cell">
+																		<a class="stream-action" action-type="show-email" show-label="${HTML:gs.getMessage('Hide email details')}" href="$[HTML:jvar_entry.email().display_path()]" target="_blank">
+																		${gs.getMessage('Show email details')}
+																	</a>
+																</span>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div class="sn-card-component sn-card-component_summary sn-card-component_summary_spacing" style="display:none;">
+													<div class="sn-widget sn-widget-textblock"></div>
+													<j:if test="${SNC.NGListHistoryRenderUtil.showEmailStreamResponseActions() == true}">
+														<button class="stream-action" action-type="email-stream-response" type="button" reply-type="reply" reply-id="$[HTML:jvar_entry.email().sys_id()]" sys-id="$[${ref_parent}.getUniqueValue()]" table="$[jvar_table]">${gs.getMessage("Reply")}</button>
+														<button class="stream-action" action-type="email-stream-response" type="button" reply-type="replyAll" reply-id="$[HTML:jvar_entry.email().sys_id()]" sys-id="$[${ref_parent}.getUniqueValue()]" table="$[jvar_table]">${gs.getMessage("Reply All")}</button>
+														<button class="stream-action" action-type="email-stream-response" type="button" reply-type="forward" reply-id="$[HTML:jvar_entry.email().sys_id()]" sys-id="$[${ref_parent}.getUniqueValue()]" table="$[jvar_table]">${gs.getMessage("Forward")}</button>
+													</j:if>
+												</div>
+											</j2:if>
+
+											<j2:if test="$[jvar_entry.type() == 'JOURNAL']">
+													<g2:set_if var="jvar_expanded_class" test="$[jvar_entry.journal().is_truncated() == 'true' || !jvar_activity_stream_show_more_less_enabled]" true="state-expanded" false=""/>
+												<div class="sn-card-component sn-card-component_summary sn-card-component_summary_spacing">
+													<div class="sn-widget sn-widget-textblock $[jvar_expanded_class]">
+														<j2:if test="$[jvar_entry.journal().contains_code() == 'true']">
+															<!-- Gnarly hack to prevent browser from letting bad HTML in a [code] block break layout -->
+															<script type="text/html-template" id="journal-content-value_$[jvar_entry.journal().sys_id()]">
+																<g2:no_escape>$[NLBR,HTMLSAN:jvar_entry.journal().html_value()]</g2:no_escape>
+															</script>
+															<span id="journal-content_$[jvar_entry.journal().sys_id()]"
+																  class="sn-widget-textblock-body sn-widget-textblock-body_formatted"></span>
+															<script>
+																(function() {
+																	"use strict";
+																	var journalContentTarget = document.getElementById("journal-content_$[jvar_entry.journal().sys_id()]");
+																	var journalContentSource = document.getElementById("journal-content-value_$[jvar_entry.journal().sys_id()]");
+																	if (journalContentTarget $[AND] journalContentSource)
+																		journalContentTarget.innerHTML = journalContentSource.textContent;
+																})();
+
+															</script>
+														</j2:if>
+														<j2:if test="$[jvar_entry.journal().contains_code() != 'true']">
+														<span class="sn-widget-textblock-body sn-widget-textblock-body_formatted">
+																<g2:no_escape>$[NLBR:jvar_entry.journal().html_value()]</g2:no_escape>
+														</span>
+														</j2:if>
+															<j2:if test="$[jvar_entry.journal().is_truncated() == 'true']">
+															<div class="row">
+																<div class="col-xs-12">
+																		<a action-type="show-all" sys-id="$[jvar_entry.journal().sys_id()]" class="stream-action">${gs.getMessage('See all text')}</a>
+																</div>
+															</div>
+														</j2:if>
+													</div>
+														<j2:if test="$[jvar_entry.journal().is_long() == 'true' ${AND} jvar_activity_stream_show_more_less_enabled]">
+															<g2:set_if var="jvar_disabled_style" test="$[jvar_entry.journal().is_truncated() == 'true']" true="display:none;" false=""/>
+														<a action-type="show-more" class="stream-action stream-action-show-more" show-label="${gs.getMessage('Show Less')}" style="$[jvar_disabled_style]">
+															${gs.getMessage('Show More')}
+														</a>
+													</j2:if>
+												</div>
+											</j2:if>
+
+												<g2:set_if var="jvar_color_class" test="$[jvar_entry.type() == 'JOURNAL']" true="sn-card-component_accent-bar_dark" false=""/>
+												<g2:set_if var="jvar_color_style" test="$[jvar_entry.field_color() != '']" true="background-color: $[jvar_entry.field_color()]" false=""/>
+											<div class="sn-card-component_accent-bar $[jvar_color_class]" style="$[jvar_color_style]"/>
+										</li>
+									</j2:forEach>
+								</ul>
+								<!-- End jelly entries -->
+							</div>
+							<div class="${jvar_cols_addons}"></div>
+						</div>
+					</div>
+					</j:if>
+
+					<sn-attachment-preview/>
+
+					<g2:inline template="angular_template.xml" name="ng_activity_stream.xml"/>
+					<g2:inline template="angular_template.xml" name="sn_attachment_preview.xml"/>
+					<g2:inline template="angular_template.xml" name="sn_avatar.xml"/>
+					<g2:inline template="angular_template.xml" name="sn_user_avatar.xml"/>
+					<g2:inline template="angular_template.xml" name="sn_avatar_popover.xml"/>
+					<g2:inline template="angular_template.xml" name="sn_avatar_button.xml"/>
+					<g2:inline template="angular_template.xml" name="snMentionPopover.xml"/>
+					<g:inline template="angular_template.xml" name="snUserProfile.xml"/>
+					<g2:inline template="angular_template.xml" name="x_8821_dev_toolbox_record_stream_entry.xml"/>
+					<g:inline template="ng_translations.xml"/>
+				</j2:if>
+				</j2:if>
+			</td>
+		</tr>
+	</j:if>
+</j:jelly>
+]]></xml>
+    </sys_ui_macro>
+</record_update>

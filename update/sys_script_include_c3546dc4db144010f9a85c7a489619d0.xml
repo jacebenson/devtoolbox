@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_8821_dev_toolbox.activityFormatter</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>activityFormatter</name>
+        <script><![CDATA[var activityFormatter = Class.create();
+activityFormatter.prototype = {
+    initialize: function() {
+    },
+	generateRand: function() {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+			return v.toString(16);
+		});
+	},
+	/*
+	var obj = new GlideNGStreamAPI().getFormStreamData('incident','96622d44db144010f9a85c7a48961953',['work_notes','comments','short_description']);
+gs.print(JSON.stringify(obj,'',' '));
+
+//.fields_json()
+//.sys_timestamp()
+//.hasEntries()
+//.first_writable_journal()
+//.entries() returns array of entries
+
+//entries
+//.show_avatar()
+//.initials() // e.g. MB
+//.user_image() // e.g. url
+//.presence_user_id()
+//.sys_created_by()
+//.type()// e.g. "JOURNAL","EMAIL","IMAGE","ATTACHMENT", "VIDEO", "AUDIT", 
+	*/
+    type: 'activityFormatter'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-30 04:34:11</sys_created_on>
+        <sys_id>c3546dc4db144010f9a85c7a489619d0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>activityFormatter</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_script_include_c3546dc4db144010f9a85c7a489619d0</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-30 05:04:40</sys_updated_on>
+    </sys_script_include>
+</record_update>

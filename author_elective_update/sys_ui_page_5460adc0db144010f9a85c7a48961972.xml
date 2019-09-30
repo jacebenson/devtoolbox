@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="DELETE">
+        <category>general</category>
+        <client_script><![CDATA[
+		function getList() {
+			var sm = gel('subname');
+			var sBox = gel('type');
+			var type = sBox.options[sBox.options.selectedIndex].value;
+
+			if (type == 'shr' || type == 'exp') {
+				sm.style.display = "none";
+				sm.style.visibility = "hidden";
+			} else {
+				sm.style.display = "block";
+				sm.style.visibility = "visible";
+			}
+
+		    var aj = new GlideAjax("CacheInspectAjax");
+		    aj.addParam("sysparm_chars", "list");
+		    aj.addParam("sysparm_type", type);
+		    aj.getXML(cacheResponse);
+		}
+		
+		function cacheResponse(request) {
+			var rxml = request.responseXML
+		    var type = request.responseXML.documentElement.getAttribute("sysparm_type");
+			var nl = gel('name_list');
+			var items = rxml.getElementsByTagName("item");
+			nl.options.length = 0;
+			for (var i = 0; i < items.length; i++) {
+				var v = items[i].getAttribute("value");
+				var o = new Option(v, v);
+				nl.options[nl.options.length] = o;
+			}
+			
+			if (type == 'shr' || type == 'exp') {
+				nl.onchange =  function() { showDetails(type, nl); };
+			} else {
+				var nl2 = gel('sub_name_list');
+				nl.onchange =  function() { subList(); };
+				nl2.onchange =  function() { showDetails(type, nl, nl2); };
+			}
+		}
+		
+		function subList() {
+			var filter = gel("subname_filter");
+			filter.value = "";
+			updateSubList();
+		}
+		
+		function updateSubList() {
+			var sBox = gel('type');
+			var type = sBox.options[sBox.options.selectedIndex].value;
+			sBox = gel('name_list');
+			var name = sBox.options[sBox.options.selectedIndex].value;
+			var filter = gel("subname_filter");
+
+		    var aj = new GlideAjax("CacheInspectAjax");
+		    aj.addParam("sysparm_chars", "list");
+		    aj.addParam("sysparm_type", type);
+		    aj.addParam("sysparm_name", name);
+		    aj.addParam("sysparm_filter", filter.value);
+		    aj.getXML(showSubList);
+		}
+		
+		function showSubList(request) {
+			var rxml = request.responseXML
+			var nl = gel('sub_name_list');
+			var items = rxml.getElementsByTagName("item");
+			nl.options.length = 0;
+			for (var i = 0; i < items.length; i++) {
+				var v = items[i].getAttribute("value");
+				var o = new Option(v, v);
+				nl.options[nl.options.length] = o;
+			}
+			var e = gel('subname_count');
+			e.innerHTML = nl.options.length;
+			writeDetails();
+		}
+
+		function showDetails(type, sBox, sBox2) {
+			var name = sBox.options[sBox.options.selectedIndex].value;
+			var value = "";
+			
+			if (sBox2)
+				value += sBox2.options[sBox2.options.selectedIndex].value;
+
+		    var aj = new GlideAjax("CacheInspectAjax");
+		    aj.addParam("sysparm_chars", "get");
+		    aj.addParam("sysparm_type", type);
+		    aj.addParam("sysparm_name", name);
+		    aj.addParam("sysparm_value", value);
+		    aj.getXML(writeDetails);
+		}
+		
+		function writeDetails(request) {
+			var ta = gel('details');
+			if (!request || !request.responseXML) {
+				ta.value = '';				
+				return;
+			}
+				
+			var rxml = request.responseXML;
+			var items = rxml.getElementsByTagName("item");
+			for (var i = 0; i < items.length; i++) {
+				var v = items[i];
+				if (v.getAttribute('name') == "details")
+					ta.value = getTextValue(v);
+			}
+		}
+		
+		addLoadEvent(getList);]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_8821_dev_toolbox_cache_inspect.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="true" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<script>
+	</script>
+
+	<table border="0">
+		<tr>
+			<td><img src="images/cache_header.gifx" alt="Cache Inspector"/></td>
+			<td>
+				<div><b>Cache Inspector (v2)</b></div>
+			</td>
+		</tr>
+	</table>
+
+	<div style="width:100%">
+		<label for="type">Type:$[SP]</label>
+		<select id='type' onChange='getList();'>
+			<option value='shr'>Shared</option>
+			<option value='pri'>Private</option>
+			<option value='exp'>Expression</option>
+		</select>
+	</div>
+	
+	<div style="width:100%">
+		<div class="caption"><label for="name_list">Name:</label></div>
+		<select id='name_list' size="20" style="width: 100%;">
+		</select>
+	</div>
+	<div id="subname" style="width:100%">
+		<hr/>
+		<div class="caption"><label for="sub_name_list">Sub name:$[SP]$[SP]<span id="subname_count" />$[SP]item(s)</label><label for="subname_filter">$[SP]$[SP]$[SP]$[SP]$[SP]$[SP]Filter:$[SP]</label><input id="subname_filter" size="20" onChange="updateSubList();"/></div>
+		<select id='sub_name_list' size="20" style="width: 100%;">
+		</select>
+	</div>
+	
+	<hr/>
+	<div style="width:100%">
+		<div class="caption"><label for="details">Details:</label></div>
+		<textarea id="details" style="width: 100%; height: 200px;">
+		</textarea>
+	</div>
+</j:jelly>]]></html>
+        <name>cache_inspect</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-30 04:15:31</sys_created_on>
+        <sys_id>5460adc0db144010f9a85c7a48961972</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>cache_inspect</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_page_5460adc0db144010f9a85c7a48961972</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-30 04:19:17</sys_updated_on>
+    </sys_ui_page>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</application>
+        <file_path/>
+        <instance_id>6dc85148dbd5ff4091232f17d4961995</instance_id>
+        <instance_name>dev84821</instance_name>
+        <name>sys_ui_page_5460adc0db144010f9a85c7a48961972</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_page"&gt;&lt;sys_ui_page action="INSERT_OR_UPDATE"&gt;&lt;category&gt;general&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[
+		function getList() {
+			var sm = gel('subname');
+			var sBox = gel('type');
+			var type = sBox.options[sBox.options.selectedIndex].value;
+
+			if (type == 'shr' || type == 'exp') {
+				sm.style.display = "none";
+				sm.style.visibility = "hidden";
+			} else {
+				sm.style.display = "block";
+				sm.style.visibility = "visible";
+			}
+
+		    var aj = new GlideAjax("CacheInspectAjax");
+		    aj.addParam("sysparm_chars", "list");
+		    aj.addParam("sysparm_type", type);
+		    aj.getXML(cacheResponse);
+		}
+		
+		function cacheResponse(request) {
+			var rxml = request.responseXML
+		    var type = request.responseXML.documentElement.getAttribute("sysparm_type");
+			var nl = gel('name_list');
+			var items = rxml.getElementsByTagName("item");
+			nl.options.length = 0;
+			for (var i = 0; i &lt; items.length; i++) {
+				var v = items[i].getAttribute("value");
+				var o = new Option(v, v);
+				nl.options[nl.options.length] = o;
+			}
+			
+			if (type == 'shr' || type == 'exp') {
+				nl.onchange =  function() { showDetails(type, nl); };
+			} else {
+				var nl2 = gel('sub_name_list');
+				nl.onchange =  function() { subList(); };
+				nl2.onchange =  function() { showDetails(type, nl, nl2); };
+			}
+		}
+		
+		function subList() {
+			var filter = gel("subname_filter");
+			filter.value = "";
+			updateSubList();
+		}
+		
+		function updateSubList() {
+			var sBox = gel('type');
+			var type = sBox.options[sBox.options.selectedIndex].value;
+			sBox = gel('name_list');
+			var name = sBox.options[sBox.options.selectedIndex].value;
+			var filter = gel("subname_filter");
+
+		    var aj = new GlideAjax("CacheInspectAjax");
+		    aj.addParam("sysparm_chars", "list");
+		    aj.addParam("sysparm_type", type);
+		    aj.addParam("sysparm_name", name);
+		    aj.addParam("sysparm_filter", filter.value);
+		    aj.getXML(showSubList);
+		}
+		
+		function showSubList(request) {
+			var rxml = request.responseXML
+			var nl = gel('sub_name_list');
+			var items = rxml.getElementsByTagName("item");
+			nl.options.length = 0;
+			for (var i = 0; i &lt; items.length; i++) {
+				var v = items[i].getAttribute("value");
+				var o = new Option(v, v);
+				nl.options[nl.options.length] = o;
+			}
+			var e = gel('subname_count');
+			e.innerHTML = nl.options.length;
+			writeDetails();
+		}
+
+		function showDetails(type, sBox, sBox2) {
+			var name = sBox.options[sBox.options.selectedIndex].value;
+			var value = "";
+			
+			if (sBox2)
+				value += sBox2.options[sBox2.options.selectedIndex].value;
+
+		    var aj = new GlideAjax("CacheInspectAjax");
+		    aj.addParam("sysparm_chars", "get");
+		    aj.addParam("sysparm_type", type);
+		    aj.addParam("sysparm_name", name);
+		    aj.addParam("sysparm_value", value);
+		    aj.getXML(writeDetails);
+		}
+		
+		function writeDetails(request) {
+			var ta = gel('details');
+			if (!request || !request.responseXML) {
+				ta.value = '';				
+				return;
+			}
+				
+			var rxml = request.responseXML;
+			var items = rxml.getElementsByTagName("item");
+			for (var i = 0; i &lt; items.length; i++) {
+				var v = items[i];
+				if (v.getAttribute('name') == "details")
+					ta.value = getTextValue(v);
+			}
+		}
+		
+		addLoadEvent(getList);]]&gt;&lt;/client_script&gt;&lt;description/&gt;&lt;direct&gt;false&lt;/direct&gt;&lt;endpoint&gt;x_8821_dev_toolbox_cache_inspect.do&lt;/endpoint&gt;&lt;html&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;j:jelly trim="true" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null"&gt;
+	&lt;script&gt;
+	&lt;/script&gt;
+
+	&lt;table border="0"&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;img src="images/cache_header.gifx" alt="Cache Inspector"/&gt;&lt;/td&gt;
+			&lt;td&gt;
+				&lt;div&gt;&lt;b&gt;Cache Inspector (v2)&lt;/b&gt;&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/table&gt;
+
+	&lt;div style="width:100%"&gt;
+		&lt;label for="type"&gt;Type:$[SP]&lt;/label&gt;
+		&lt;select id='type' onChange='getList();'&gt;
+			&lt;option value='shr'&gt;Shared&lt;/option&gt;
+			&lt;option value='pri'&gt;Private&lt;/option&gt;
+			&lt;option value='exp'&gt;Expression&lt;/option&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+	
+	&lt;div style="width:100%"&gt;
+		&lt;div class="caption"&gt;&lt;label for="name_list"&gt;Name:&lt;/label&gt;&lt;/div&gt;
+		&lt;select id='name_list' size="20" style="width: 100%;"&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+	&lt;div id="subname" style="width:100%"&gt;
+		&lt;hr/&gt;
+		&lt;div class="caption"&gt;&lt;label for="sub_name_list"&gt;Sub name:$[SP]$[SP]&lt;span id="subname_count" /&gt;$[SP]item(s)&lt;/label&gt;&lt;label for="subname_filter"&gt;$[SP]$[SP]$[SP]$[SP]$[SP]$[SP]Filter:$[SP]&lt;/label&gt;&lt;input id="subname_filter" size="20" onChange="updateSubList();"/&gt;&lt;/div&gt;
+		&lt;select id='sub_name_list' size="20" style="width: 100%;"&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+	
+	&lt;hr/&gt;
+	&lt;div style="width:100%"&gt;
+		&lt;div class="caption"&gt;&lt;label for="details"&gt;Details:&lt;/label&gt;&lt;/div&gt;
+		&lt;textarea id="details" style="width: 100%; height: 200px;"&gt;
+		&lt;/textarea&gt;
+	&lt;/div&gt;
+&lt;/j:jelly&gt;]]&gt;&lt;/html&gt;&lt;name&gt;cache_inspect&lt;/name&gt;&lt;processing_script/&gt;&lt;sys_class_name&gt;sys_ui_page&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jacebenson&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-09-30 04:15:31&lt;/sys_created_on&gt;&lt;sys_id&gt;5460adc0db144010f9a85c7a48961972&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;cache_inspect&lt;/sys_name&gt;&lt;sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox"&gt;57533b78db4623008096a455ca9619ba&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Developer Toolbox"&gt;57533b78db4623008096a455ca9619ba&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_page_5460adc0db144010f9a85c7a48961972&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jacebenson&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-09-30 04:19:17&lt;/sys_updated_on&gt;&lt;/sys_ui_page&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-183577438</payload_hash>
+        <record_name>cache_inspect</record_name>
+        <reverted_from/>
+        <source>0aeeeccddbc80010f9a85c7a489619a7</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-30 04:19:17</sys_created_on>
+        <sys_id>67412d04db144010f9a85c7a48961941</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16d8064df2d0000001</sys_recorded_at>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-30 04:19:17</sys_updated_on>
+        <type>UI Page</type>
+        <update_guid>af412d04671440109bb3689c85149d40</update_guid>
+        <update_guid_history>af412d04671440109bb3689c85149d40:-183577438,d8702dc0de1440108352201aaa0194c6:-1077078595</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-30 04:20:18</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_page">sys_ui_page</sys_db_object>
+        <sys_id>06e1f72eb6884a8e813b9ff1338f6979</sys_id>
+        <sys_metadata>5460adc0db144010f9a85c7a48961972</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cache_inspect</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_scope_delete display_value="">186d300bf7ad4c60843652e8e89a2900</sys_scope_delete>
+        <sys_update_name>sys_ui_page_5460adc0db144010f9a85c7a48961972</sys_update_name>
+        <sys_update_version display_value="sys_ui_page_5460adc0db144010f9a85c7a48961972">67412d04db144010f9a85c7a48961941</sys_update_version>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-30 04:20:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

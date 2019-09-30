@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>record_stream_entry</name>
+        <scoped_name>x_8821_dev_toolbox_record_stream_entry</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-09-30 04:45:05</sys_created_on>
+        <sys_id>8927ed08db144010f9a85c7a48961956</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>record_stream_entry</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_ui_macro_8927ed08db144010f9a85c7a48961956</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-09-30 04:45:05</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide">
+	<!-- used in VTB large modal card - but not in the stream -->
+	<div ng-init="user_image = true">
+		<div class="sn-card-component sn-card-component_first sn-card-component_meta sn-card-component_meta_sibling">
+			<sn-user-avatar ng-if="::entry.sys_created_by != 'system'" avatar-url="entry.user_image" initials="entry.initials" user-id="entry.user_id" class="sn-card-component-avatar sn-avatar_xs" />
+			<span ng-if="::entry.sys_created_by != 'system'" class="sn-card-component-createdby" ng-bind="::entry.sys_created_by"></span>
+			<span ng-if="::entry.sys_created_by == 'system'" class="sn-card-component-createdby">${gs.getMessage('System')}</span>
+		</div>
+
+		<div class="sn-card-component sn-card-component_first sn-card-component_meta">
+			<span class="sn-card-component-time" ng-switch="::entry.type">
+				<span ng-switch-when="journal" ng-bind="::entry.entries.journal[0].field_label"/>
+				<span ng-switch-when="attachment-image">${gs.getMessage('Image uploaded')}</span>
+				<span ng-switch-when="attachment">${gs.getMessage('Attachment uploaded')}</span>
+				<span ng-switch-default="true">{{ entry.is_email ? entry.label : '${gs.getMessage(' Field Changes ')}' }}</span>
+				<span class="sn-card-component_accent-bar_bullet">•</span>
+				<div class="date-calendar">{{::entry.sys_created_on_adjusted}}</div>
+				<div class="date-timeago">
+					<sn-time-ago title="{{::entry.sys_created_on_adjusted}}" timestamp="::entry.sys_created_on"></sn-time-ago>
+				</div>
+			</span>
+		</div>
+
+		<div ng-if="entry.attachment ${AND} entry.attachment.state == 'not_available'"
+			 class="sn-card-component sn-card-component_attachment sn-card-attachment-unavailable">
+				<a ng-click="showAttachmentUnAvailabilityMessage(entry.attachment.file_name)" href="javascript:;">
+					{{ ::entry.attachment.file_name }} [${gs.getMessage('unavailable')}]
+				</a>
+		</div>
+
+		<div class="sn-card-component sn-card-component_attachment state-selectable"
+			 ng-if="entry.attachment ${AND} entry.type == 'attachment-image' ${AND}
+			 		entry.attachment.thumbnail_path ${AND} entry.attachment.state != 'not_available'" >
+			<a class="clearfix" target="_blank"
+			   ng-href="/sys_attachment.do?view=true&amp;sys_id={{ ::entry.attachment.sys_id }}"
+				ng-click="handleASAttachmentClick($event, entry)">
+				<img class="sn-card-component-image" ng-src="{{ ::entry.attachment.image_path}}"
+					 ng-if="!attachmentAdviceRequired || entry.attachment.state == 'available'"/>
+				<span class="text-primary" ng-if="attachmentAdviceRequired ${AND} entry.attachment.state != 'available'">
+					{{ ::entry.attachment.file_name }}
+				</span>
+			</a>
+		</div>
+
+		<g:inline template="record_stream_entry_body.xml" />
+
+		<div ng-class="::{'sn-card-component_accent-bar_dark' : entry.entries.journal[0]}"
+			 class="sn-card-component_accent-bar "
+			 ng-style="::{ 'background-color': fields[entry.entries.journal[0].field_name].color }" />
+	</div>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>
