@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
+        <access>public</access>
         <active>true</active>
         <api_name>x_8821_dev_toolbox.variableHelper</api_name>
         <caller_access/>
@@ -56,16 +56,24 @@ variableHelper.prototype = {
 		};
 	},
 	example: function(){
-		var current = new GlideRecord('change_request');
-		current.get('c286d61347c12200e0ef563dbb9a71df');
-		var vh = new x_8821_glide_utils.variableHelper();
-		var vars = vh.getVariables(current);
-		gs.info(JSON.stringify(vars));
+		var vh = new x_8821_dev_toolbox.variableHelper();
 
-		var current2 = new GlideRecord('sc_req_item');
-		current2.get('257c82740f4b1300fc69cdbce1050ea2');
-		var vars2 = vh.getVariables(current);
-		gs.info(JSON.stringify(vars));
+		var change_request = new GlideRecord('change_request');
+		change_request.get('c286d61347c12200e0ef563dbb9a71df');
+		var change_request_vars = vh.getVariables(current);
+		var change_request_printable = JSON.stringify(change_request_vars,'',' ');
+		gs.info(change_request_printable);
+
+		var sc_req_item = new GlideRecord('sc_req_item');
+		//current.get('257c82740f4b1300fc69cdbce1050ea2');
+		sc_req_item.setLimit(1);
+		sc_req_item.orderByDesc('sys_created_on');
+		sc_req_item.query();
+		if(sc_req_item.next()){
+			var sc_req_item_vars = vh.getVariables(current);
+			var sc_req_item_printable = JSON.stringify(sc_req_item_vars,'',' ');
+			gs.info(sc_req_item_printable);
+		}
 
 	},
 	isEnabled: function(){
@@ -296,13 +304,13 @@ variableHelper.prototype = {
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-03-29 04:45:07</sys_created_on>
         <sys_id>3de8b828db2473007d159235ca961998</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>variableHelper</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_script_include_3de8b828db2473007d159235ca961998</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-03-29 04:45:07</sys_updated_on>
+        <sys_updated_on>2019-09-30 01:38:15</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -3,7 +3,9 @@
         <action_name>u_fpc_set_name_from_question</action_name>
         <active>true</active>
         <client>true</client>
-        <client_script_v2/>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
         <comments>Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne &#13;
 &#13;
 Populates the "Name" field with a lowercase version of the Question field.   It will also replace any special characters with an underscore character (anything other than a-z, 0-9).</comments>
@@ -25,7 +27,7 @@ Populates the "Name" field with a lowercase version of the Question field.   It 
         <list_link>false</list_link>
         <list_save_with_form_button>false</list_save_with_form_button>
         <list_style/>
-        <name>Set Name from Question (scoped)</name>
+        <name>Set Name from Question</name>
         <onclick>u_fpcSetNameFromQuestion()</onclick>
         <order>101100</order>
         <script><![CDATA[function u_fpcSetNameFromQuestion(){
@@ -56,15 +58,15 @@ Populates the "Name" field with a lowercase version of the Question field.   It 
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>639e37f4db8623008096a455ca9619ea</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>Set Name from Question (scoped)</sys_name>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Set Name from Question</sys_name>
         <sys_overrides/>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_ui_action_639e37f4db8623008096a455ca9619ea</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-20 06:56:09</sys_updated_on>
+        <sys_updated_on>2019-09-30 01:01:18</sys_updated_on>
         <table>item_option_new</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>
