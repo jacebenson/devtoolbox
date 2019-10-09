@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item">
     <sc_cat_item action="INSERT_OR_UPDATE">
-        <active>true</active>
+        <active>false</active>
         <availability>on_desktop</availability>
         <billable>false</billable>
         <category/>
@@ -9,10 +9,10 @@
         <delivery_plan/>
         <delivery_plan_script/>
         <delivery_time>1970-01-03 00:00:00</delivery_time>
-        <description><![CDATA[<p><a title="SP link" href="/sp/?id&#61;sc_cat_item&amp;sys_id&#61;269797b21bfb3300f1bf2136ec4bcbc3" target="_blank" rel="noopener noreferrer nofollow">SP link</a></p>]]></description>
+        <description/>
         <display_price_property>non_zero</display_price_property>
         <entitlement_script/>
-        <flow_designer_flow/>
+        <flow_designer_flow display_value="1 Task">eed98b8fdbd00010f9a85c7a48961954</flow_designer_flow>
         <group/>
         <hide_sp>false</hide_sp>
         <icon/>
@@ -26,7 +26,7 @@
         <mobile_picture/>
         <mobile_picture_type>use_desktop_picture</mobile_picture_type>
         <model/>
-        <name>Request a new catalog item</name>
+        <name>Flow Item Template</name>
         <no_attachment_v2>false</no_attachment_v2>
         <no_cart>false</no_cart>
         <no_cart_v2>false</no_cart_v2>
@@ -42,30 +42,30 @@
         <order>0</order>
         <ordered_item_link/>
         <picture/>
-        <preview>JavaScript: popupOpenStandard("com.glideapp.servicecatalog_cat_item_view.do?v=1&amp;sysparm_id=269797b21bfb3300f1bf2136ec4bcbc3&amp;sysparm_preview=true", "summary");</preview>
+        <preview>JavaScript: popupOpenStandard("com.glideapp.servicecatalog_cat_item_view.do?v=1&amp;sysparm_id=263c5647db500010f9a85c7a48961932&amp;sysparm_preview=true", "summary");</preview>
         <price>0</price>
         <recurring_frequency/>
         <recurring_price>0</recurring_price>
         <request_method/>
-        <roles>snc_internal</roles>
+        <roles/>
         <sc_catalogs/>
         <sc_ic_item_staging/>
         <sc_ic_version/>
-        <short_description>This will be simple item to control the intake of new items</short_description>
+        <short_description/>
         <show_variable_help_on_load>false</show_variable_help_on_load>
         <start_closed>false</start_closed>
         <sys_class_name>sc_cat_item</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
-        <sys_created_on>2019-09-14 05:28:54</sys_created_on>
-        <sys_id>269797b21bfb3300f1bf2136ec4bcbc3</sys_id>
+        <sys_created_on>2019-10-09 16:18:43</sys_created_on>
+        <sys_id>263c5647db500010f9a85c7a48961932</sys_id>
         <sys_mod_count>4</sys_mod_count>
-        <sys_name>Request a new catalog item</sys_name>
+        <sys_name>Flow Item Template</sys_name>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
         <sys_policy/>
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
-        <sys_update_name>sc_cat_item_269797b21bfb3300f1bf2136ec4bcbc3</sys_update_name>
+        <sys_update_name>sc_cat_item_263c5647db500010f9a85c7a48961932</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-20 17:00:48</sys_updated_on>
+        <sys_updated_on>2019-10-09 20:12:31</sys_updated_on>
         <template/>
         <type>item</type>
         <use_sc_layout>true</use_sc_layout>
@@ -73,24 +73,24 @@
         <visible_bundle>true</visible_bundle>
         <visible_guide>true</visible_guide>
         <visible_standalone>true</visible_standalone>
-        <workflow display_value="Create Item">62e160571b77b300f1bf2136ec4bcbb4</workflow>
+        <workflow/>
     </sc_cat_item>
-    <sys_translated_text action="delete_multiple" query="documentkey=269797b21bfb3300f1bf2136ec4bcbc3"/>
-    <fx_price action="delete_multiple" query="id=269797b21bfb3300f1bf2136ec4bcbc3"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=263c5647db500010f9a85c7a48961932"/>
+    <fx_price action="delete_multiple" query="id=263c5647db500010f9a85c7a48961932"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>price</field>
-        <id>269797b21bfb3300f1bf2136ec4bcbc3</id>
+        <id>263c5647db500010f9a85c7a48961932</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>jacebenson</sys_created_by>
-        <sys_created_on>2019-09-14 05:28:55</sys_created_on>
-        <sys_id>e7c7d7f21bfb3300f1bf2136ec4bcb6a</sys_id>
+        <sys_created_on>2019-10-09 16:18:43</sys_created_on>
+        <sys_id>714c9e07db500010f9a85c7a4896196f</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-14 05:28:55</sys_updated_on>
+        <sys_updated_on>2019-10-09 16:18:43</sys_updated_on>
         <table>sc_cat_item</table>
         <type>calculated</type>
     </fx_price>
@@ -98,16 +98,16 @@
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>recurring_price</field>
-        <id>269797b21bfb3300f1bf2136ec4bcbc3</id>
+        <id>263c5647db500010f9a85c7a48961932</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>jacebenson</sys_created_by>
-        <sys_created_on>2019-09-14 05:28:55</sys_created_on>
-        <sys_id>afc7d7f21bfb3300f1bf2136ec4bcb6b</sys_id>
+        <sys_created_on>2019-10-09 16:18:43</sys_created_on>
+        <sys_id>c64c9e07db500010f9a85c7a48961970</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-14 05:28:55</sys_updated_on>
+        <sys_updated_on>2019-10-09 16:18:43</sys_updated_on>
         <table>sc_cat_item</table>
         <type>calculated</type>
     </fx_price>

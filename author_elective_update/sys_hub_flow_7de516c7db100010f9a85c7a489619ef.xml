@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="DELETE">
+        <access/>
+        <acls/>
+        <active>false</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <internal_name>sc_1_approval_1_task</internal_name>
+        <label_cache>[{"name":"b9b804ab-3c69-4d1d-a5b2-a5f1e4656fef.Catalog Task","label":"1➛Catalog Task","reference":"sc_task","reference_display":"Catalog Task","type":"document_id","base_type":"document_id"}]</label_cache>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>SC 1 Approval 1 Task</name>
+        <outputs/>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>draft</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 15:50:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7de516c7db100010f9a85c7a489619ef</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>SC 1 Approval 1 Task</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_update_name>sys_hub_flow_7de516c7db100010f9a85c7a489619ef</sys_update_name>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=7de516c7db100010f9a85c7a489619ef"/>
+    <sys_variable_value action="delete_multiple" query="document_key=7de516c7db100010f9a85c7a489619ef"/>
+    <sys_hub_flow_component action="delete_multiple" query="flow=7de516c7db100010f9a85c7a489619ef^sys_idNOT IN2a1c5247db500010f9a85c7a489619da"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Create Catalog Task">f597c41073081300612c273ffff6a767</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="SC 1 Approval 1 Task">7de516c7db100010f9a85c7a489619ef</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>2a1c5247db500010f9a85c7a489619da</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+        <ui_id>b9b804ab-3c69-4d1d-a5b2-a5f1e4656fef</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=2a1c5247db500010f9a85c7a489619da"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a1c5247db500010f9a85c7a489619da</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>6a1c5247db500010f9a85c7a489619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+        <value>assignment_group=fd-scripted</value>
+        <variable display_value="">4c29401473081300612c273ffff6a738</variable>
+    </sys_variable_value>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=7de516c7db100010f9a85c7a489619ef^sys_idNOT INb9e552cfdb100010f9a85c7a4896196b"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>7de516c7db100010f9a85c7a489619ef</id>
+        <name>SC 1 Approval 1 Task</name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 15:50:52</sys_created_on>
+        <sys_id>b9e552cfdb100010f9a85c7a4896196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 15:50:52</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_action_instance action="delete_multiple" query="flow=7de516c7db100010f9a85c7a489619ef^sys_idNOT IN2a1c5247db500010f9a85c7a489619da"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Create Catalog Task">f597c41073081300612c273ffff6a767</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="SC 1 Approval 1 Task">7de516c7db100010f9a85c7a489619ef</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>2a1c5247db500010f9a85c7a489619da</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+        <ui_id>b9b804ab-3c69-4d1d-a5b2-a5f1e4656fef</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=2a1c5247db500010f9a85c7a489619da"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2a1c5247db500010f9a85c7a489619da</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>6a1c5247db500010f9a85c7a489619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+        <value>assignment_group=fd-scripted</value>
+        <variable display_value="">4c29401473081300612c273ffff6a738</variable>
+    </sys_variable_value>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=2a1c5247db500010f9a85c7a489619da^sys_idNOT IN261c5247db500010f9a85c7a489619dd,6a1c5247db500010f9a85c7a489619dc"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>ah_fields</input_name>
+        <instance>2a1c5247db500010f9a85c7a489619da</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"assignment_group":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.trigger.current.variables.task_1_group;","savedValue":""}}</script>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>261c5247db500010f9a85c7a489619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>ah_requested_item</input_name>
+        <instance>2a1c5247db500010f9a85c7a489619da</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_requested_item":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.trigger.current;"}}</script>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>6a1c5247db500010f9a85c7a489619dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</application>
+        <file_path/>
+        <instance_id>6dc85148dbd5ff4091232f17d4961995</instance_id>
+        <instance_name>dev84821</instance_name>
+        <name>sys_hub_flow_7de516c7db100010f9a85c7a489619ef</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow"><sys_hub_flow action="INSERT_OR_UPDATE"><access/><acls/><active>false</active><annotation/><callable_by_client_api>false</callable_by_client_api><category/><copied_from/><copied_from_name/><description/><internal_name>sc_1_approval_1_task</internal_name><label_cache>[{"name":"b9b804ab-3c69-4d1d-a5b2-a5f1e4656fef.Catalog Task","label":"1➛Catalog Task","reference":"sc_task","reference_display":"Catalog Task","type":"document_id","base_type":"document_id"}]</label_cache><latest_snapshot/><master_snapshot/><name>SC 1 Approval 1 Task</name><outputs/><remote_trigger_id/><run_as>user</run_as><sc_callable>false</sc_callable><show_draft_actions>false</show_draft_actions><show_triggered_flows>false</show_triggered_flows><status>draft</status><sys_class_name>sys_hub_flow</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 15:50:52</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7de516c7db100010f9a85c7a489619ef</sys_id><sys_mod_count>1</sys_mod_count><sys_name>SC 1 Approval 1 Task</sys_name><sys_overrides/><sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package><sys_policy/><sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope><sys_update_name>sys_hub_flow_7de516c7db100010f9a85c7a489619ef</sys_update_name><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on><type>flow</type></sys_hub_flow><sys_translated_text action="delete_multiple" query="documentkey=7de516c7db100010f9a85c7a489619ef"/><sys_variable_value action="delete_multiple" query="document_key=7de516c7db100010f9a85c7a489619ef"/><sys_hub_flow_component action="delete_multiple" query="flow=7de516c7db100010f9a85c7a489619ef^sys_idNOT IN2a1c5247db500010f9a85c7a489619da"/><sys_hub_action_instance action="INSERT_OR_UPDATE"><action_inputs/><action_type display_value="Create Catalog Task">f597c41073081300612c273ffff6a767</action_type><action_type_parent/><comment/><compiled_snapshot/><display_text/><flow display_value="SC 1 Approval 1 Task">7de516c7db100010f9a85c7a489619ef</flow><order>1</order><parent_ui_id/><sys_class_name>sys_hub_action_instance</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 16:17:57</sys_created_on><sys_id>2a1c5247db500010f9a85c7a489619da</sys_id><sys_mod_count>2</sys_mod_count><sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on><ui_id>b9b804ab-3c69-4d1d-a5b2-a5f1e4656fef</ui_id></sys_hub_action_instance><sys_variable_value action="delete_multiple" query="document_key=2a1c5247db500010f9a85c7a489619da"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_hub_action_instance</document><document_key>2a1c5247db500010f9a85c7a489619da</document_key><order>3</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 16:17:57</sys_created_on><sys_id>6a1c5247db500010f9a85c7a489619de</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on><value>assignment_group=fd-scripted</value><variable display_value="">4c29401473081300612c273ffff6a738</variable></sys_variable_value><sys_flow_cat_variable_model action="delete_multiple" query="id=7de516c7db100010f9a85c7a489619ef^sys_idNOT INb9e552cfdb100010f9a85c7a4896196b"/><sys_flow_cat_variable_model action="INSERT_OR_UPDATE"><id>7de516c7db100010f9a85c7a489619ef</id><name>SC 1 Approval 1 Task</name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 15:50:52</sys_created_on><sys_id>b9e552cfdb100010f9a85c7a4896196b</sys_id><sys_mod_count>0</sys_mod_count><sys_scope/><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 15:50:52</sys_updated_on></sys_flow_cat_variable_model><sys_hub_action_instance action="delete_multiple" query="flow=7de516c7db100010f9a85c7a489619ef^sys_idNOT IN2a1c5247db500010f9a85c7a489619da"/><sys_hub_action_instance action="INSERT_OR_UPDATE"><action_inputs/><action_type display_value="Create Catalog Task">f597c41073081300612c273ffff6a767</action_type><action_type_parent/><comment/><compiled_snapshot/><display_text/><flow display_value="SC 1 Approval 1 Task">7de516c7db100010f9a85c7a489619ef</flow><order>1</order><parent_ui_id/><sys_class_name>sys_hub_action_instance</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 16:17:57</sys_created_on><sys_id>2a1c5247db500010f9a85c7a489619da</sys_id><sys_mod_count>2</sys_mod_count><sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on><ui_id>b9b804ab-3c69-4d1d-a5b2-a5f1e4656fef</ui_id></sys_hub_action_instance><sys_variable_value action="delete_multiple" query="document_key=2a1c5247db500010f9a85c7a489619da"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_hub_action_instance</document><document_key>2a1c5247db500010f9a85c7a489619da</document_key><order>3</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 16:17:57</sys_created_on><sys_id>6a1c5247db500010f9a85c7a489619de</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on><value>assignment_group=fd-scripted</value><variable display_value="">4c29401473081300612c273ffff6a738</variable></sys_variable_value><sys_hub_input_scripts action="delete_multiple" query="instance=2a1c5247db500010f9a85c7a489619da^sys_idNOT IN261c5247db500010f9a85c7a489619dd,6a1c5247db500010f9a85c7a489619dc"/><sys_hub_input_scripts action="INSERT_OR_UPDATE"><active>true</active><input_name>ah_fields</input_name><instance>2a1c5247db500010f9a85c7a489619da</instance><referenced_table>sys_hub_action_instance</referenced_table><script>{"assignment_group":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.trigger.current.variables.task_1_group;","savedValue":""}}</script><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 16:17:57</sys_created_on><sys_id>261c5247db500010f9a85c7a489619dd</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on></sys_hub_input_scripts><sys_hub_input_scripts action="INSERT_OR_UPDATE"><active>true</active><input_name>ah_requested_item</input_name><instance>2a1c5247db500010f9a85c7a489619da</instance><referenced_table>sys_hub_action_instance</referenced_table><script>{"ah_requested_item":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.trigger.current;"}}</script><sys_created_by>jacebenson</sys_created_by><sys_created_on>2019-10-09 16:17:57</sys_created_on><sys_id>6a1c5247db500010f9a85c7a489619dc</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jacebenson</sys_updated_by><sys_updated_on>2019-10-09 16:17:57</sys_updated_on></sys_hub_input_scripts></record_update>]]></payload>
+        <payload_hash>635854088</payload_hash>
+        <record_name>SC 1 Approval 1 Task</record_name>
+        <reverted_from/>
+        <source>0aeeeccddbc80010f9a85c7a489619a7</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 16:17:57</sys_created_on>
+        <sys_id>ba1c5247db500010f9a85c7a489619fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16db15012170000001</sys_recorded_at>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 16:17:57</sys_updated_on>
+        <type>Flow</type>
+        <update_guid>361c5247a650001007372ffbacdb66fb</update_guid>
+        <update_guid_history>361c5247a650001007372ffbacdb66fb:635854088,cae552cfbf100010c19ca2c2fbc7336f:1484767878</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jacebenson</sys_created_by>
+        <sys_created_on>2019-10-09 19:37:39</sys_created_on>
+        <sys_db_object display_value="" name="sys_hub_flow">sys_hub_flow</sys_db_object>
+        <sys_id>58906ea3564e4198b47b38e1de9a5e91</sys_id>
+        <sys_metadata>7de516c7db100010f9a85c7a489619ef</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SC 1 Approval 1 Task</sys_name>
+        <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+        <sys_scope_delete display_value="">186d300bf7ad4c60843652e8e89a2900</sys_scope_delete>
+        <sys_update_name>sys_hub_flow_7de516c7db100010f9a85c7a489619ef</sys_update_name>
+        <sys_update_version display_value="sys_hub_flow_7de516c7db100010f9a85c7a489619ef">ba1c5247db500010f9a85c7a489619fb</sys_update_version>
+        <sys_updated_by>jacebenson</sys_updated_by>
+        <sys_updated_on>2019-10-09 19:37:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

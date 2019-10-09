@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="request_item" label="Request Item" language="en" table="var__m_sys_hub_flow_input_ddfa4307db140010f9a85c7a489619ba">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>request_item</element>
+            <help/>
+            <hint/>
+            <label>Request Item</label>
+            <language>en</language>
+            <name>var__m_sys_hub_flow_input_ddfa4307db140010f9a85c7a489619ba</name>
+            <plural/>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>jacebenson</sys_created_by>
+            <sys_created_on>2019-10-09 19:42:39</sys_created_on>
+            <sys_id>19fa4307db140010f9a85c7a489619cc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Request Item</sys_name>
+            <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
+            <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_ddfa4307db140010f9a85c7a489619ba_request_item_en</sys_update_name>
+            <sys_updated_by>jacebenson</sys_updated_by>
+            <sys_updated_on>2019-10-09 19:42:39</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
