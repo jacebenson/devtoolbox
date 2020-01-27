@@ -7,7 +7,8 @@
         <name>Create Variables</name>
         <order>100</order>
         <script><![CDATA[var sys_id = event.parm1;
-gs.debug('in script action for x_8821_dev_toolbox.createVariables');
+gs.debug('In script action for x_8821_dev_toolbox.createVariables');
+// Modified from editor out of SN
 var ip = new x_8821_dev_toolbox.itemProcess();
 ip.createVariables(sys_id, current);]]></script>
         <synchronous>false</synchronous>
