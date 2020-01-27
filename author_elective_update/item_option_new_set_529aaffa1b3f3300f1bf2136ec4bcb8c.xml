@@ -51,7 +51,7 @@
         <update_guid_history>c9aaaf3e853f33008466fed3459142fc:558909139</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="Process">6149b3721bbf3300f1bf2136ec4bcb4e</sys_audit_delete>
+        <sys_audit_delete display_value="">6149b3721bbf3300f1bf2136ec4bcb4e</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-14 07:55:09</sys_created_on>

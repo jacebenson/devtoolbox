@@ -10,18 +10,17 @@
  *    'g_sysId' the sys_id of the row or form that the script is running against
  *    'rowSysId' is also set to the sys_id of the row to support legacy actions, but g_sysId is preferred
  */
- 	try{
-		var sys_id = g_sysId;
-		var table = g_list.getTableName();
-		var url = 'https://';
-		url += top.document.domain + '/' + table + '_list.do' + '?sysparm_query=';
-		url += 'sys_id=' + sys_id + '&JSONv2&sysparm_domain_restore=false&sysparm_stack=no';
-		var windowName = 'jsonview';
-		top.window.open(url, windowName, 'height=500,width=700');
-	} catch (er) {
-		console.error('some error' + er);
-	}
-]]></action_script>
+try {
+    var sys_id = g_sysId;
+    var table = g_list.getTableName();
+    var url = 'https://';
+    url += top.document.domain + '/' + table + '_list.do' + '?sysparm_query=';
+    url += 'sys_id=' + sys_id + '&JSONv2&sysparm_domain_restore=false&sysparm_stack=no';
+    var windowName = 'jsonview';
+    top.window.open(url, windowName, 'height=500,width=700');
+} catch (er) {
+    console.error('Error in Show JSON Context Menu', er);
+}]]></action_script>
         <active>true</active>
         <comments/>
         <condition>gs.hasRole('admin') &amp;&amp; gs.getProperty('x_8821_dev_toolbox.context.show_json') === 'true'</condition>
@@ -64,7 +63,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>db5c30e8db2473007d159235ca96196e</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Show JSON</sys_name>
         <sys_overrides/>
         <sys_package display_value="Developer Toolbox" source="x_8821_dev_toolbox">57533b78db4623008096a455ca9619ba</sys_package>
@@ -72,7 +71,7 @@
         <sys_scope display_value="Developer Toolbox">57533b78db4623008096a455ca9619ba</sys_scope>
         <sys_update_name>sys_ui_context_menu_db5c30e8db2473007d159235ca96196e</sys_update_name>
         <sys_updated_by>jacebenson</sys_updated_by>
-        <sys_updated_on>2019-09-20 06:52:43</sys_updated_on>
+        <sys_updated_on>2020-01-27 20:21:49</sys_updated_on>
         <table>global</table>
         <track_selected>false</track_selected>
         <type>action</type>

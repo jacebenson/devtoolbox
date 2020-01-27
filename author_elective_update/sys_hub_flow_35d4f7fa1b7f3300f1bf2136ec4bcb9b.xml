@@ -37,10 +37,10 @@
         <sys_updated_on>2019-09-14 07:35:46</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
-    <sys_translated_text action="delete_multiple" query="documentkey=35d4f7fa1b7f3300f1bf2136ec4bcb9b"/>
-    <sys_variable_value action="delete_multiple" query="document_key=35d4f7fa1b7f3300f1bf2136ec4bcb9b"/>
-    <sys_flow_cat_variable_model action="delete_multiple" query="id=35d4f7fa1b7f3300f1bf2136ec4bcb9b^sys_idNOT INb1d4f7fa1b7f3300f1bf2136ec4bcb9d"/>
-    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+    <sys_translated_text action="DELETE" query="documentkey=35d4f7fa1b7f3300f1bf2136ec4bcb9b"/>
+    <sys_variable_value action="DELETE" query="document_key=35d4f7fa1b7f3300f1bf2136ec4bcb9b"/>
+    <sys_flow_cat_variable_model action="DELETE" query="id=35d4f7fa1b7f3300f1bf2136ec4bcb9b^sys_idNOT INb1d4f7fa1b7f3300f1bf2136ec4bcb9d"/>
+    <sys_flow_cat_variable_model action="DELETE">
         <id>35d4f7fa1b7f3300f1bf2136ec4bcb9b</id>
         <name>Standard Catalog Flows</name>
         <sys_class_name>sys_flow_cat_variable_model</sys_class_name>

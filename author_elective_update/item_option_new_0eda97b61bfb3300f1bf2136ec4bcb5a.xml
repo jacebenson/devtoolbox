@@ -84,9 +84,9 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=0eda97b61bfb3300f1bf2136ec4bcb5a"/>
-    <fx_price action="delete_multiple" query="id=0eda97b61bfb3300f1bf2136ec4bcb5a"/>
-    <fx_price action="INSERT_OR_UPDATE">
+    <sys_translated_text action="DELETE" query="documentkey=0eda97b61bfb3300f1bf2136ec4bcb5a"/>
+    <fx_price action="DELETE" query="id=0eda97b61bfb3300f1bf2136ec4bcb5a"/>
+    <fx_price action="DELETE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>price_if_checked</field>
@@ -103,7 +103,7 @@
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
-    <fx_price action="INSERT_OR_UPDATE">
+    <fx_price action="DELETE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>rec_price_if_checked</field>
@@ -146,7 +146,7 @@
         <update_guid_history>121098c30f337300609f166a112c04ec:-1801676376,9e7b53b6b6fb33008ba40c200463eaac:-1949906007</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="Order">bda88dd71b3bb300f1bf2136ec4bcb20</sys_audit_delete>
+        <sys_audit_delete display_value="">bda88dd71b3bb300f1bf2136ec4bcb20</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>jacebenson</sys_created_by>
         <sys_created_on>2019-09-15 08:20:26</sys_created_on>

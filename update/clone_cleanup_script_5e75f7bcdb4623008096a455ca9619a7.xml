@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="clone_cleanup_script">
     <clone_cleanup_script action="INSERT_OR_UPDATE">
+        <active>false</active>
         <name>Custom - Post-Clone Reset Script</name>
+        <order/>
         <script><![CDATA[/*
 Written by Jim Coyne - https://community.servicenow.com/people/jim.coyne
 
