@@ -51,3 +51,7 @@ You only need to take two steps to install this.
 
 1.  In Studio, [import application from Github](https://docs.servicenow.com/bundle/newyork-application-development/page/build/applications/task/t_ImportAppFromSourceControl.html).\
   `https://github.com/jacebenson/devtoolbox.git`
+
+Using this requires setting the properties of the application.  This application should be not noticable unless you "opt-in" on the properties.
+
+The best way to see what properties exist is just to look in Studio at the System Properties.
